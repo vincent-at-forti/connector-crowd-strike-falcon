@@ -1,0 +1,2070 @@
+{
+  "name": "crowd-strike-falcon",
+  "label": "CrowdStrike Falcon",
+  "version": "2.2.3",
+  "description": "The CrowdStrike Falcon® platform is pioneering cloud-delivered endpoint protection. It both delivers and unifies IT Hygiene, next-generation antivirus, endpoint detection and response (EDR), managed threat hunting, and threat intelligence — all delivered via a single lightweight agent.",
+  "publisher": "Fortinet",
+  "cs_approved": false,
+  "cs_compatible": true,
+  "category": "Endpoint Protection",
+  "icon_small_name": "small.png",
+  "icon_large_name": "large.png",
+  "ingestion_supported": true,
+  "ingestion_modes": [
+    "scheduled"
+  ],
+  "help_online": "https://docs.fortinet.com/document/fortisoar/2.2.3/crowdstrike-falcon/503/crowdstrike-falcon-v2-2-3",
+  "configuration": {
+    "fields": [
+      {
+        "title": "Server URL",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "value": "api.crowdstrike.com",
+        "description": "URL of the CrowdStrike Falcon server to which you will connect and perform the automated operations.",
+        "name": "server_url"
+      },
+      {
+        "title": "Client ID",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "text",
+        "description": "Client ID used to access the CrowdStrike Falcon APIs and perform automated operations.",
+        "name": "client_id"
+      },
+      {
+        "title": "Client Secret",
+        "required": true,
+        "editable": true,
+        "visible": true,
+        "type": "password",
+        "description": "Client Secret used to access the CrowdStrike Falcon APIs and perform the automated operations.",
+        "name": "client_secret"
+      },
+      {
+        "title": "Verify SSL",
+        "required": false,
+        "editable": true,
+        "visible": true,
+        "type": "checkbox",
+        "name": "verify_ssl",
+        "description": "Specifies whether the SSL certificate for the server is to be verified or not. By default, this option is set as True. ",
+        "value": true
+      }
+    ]
+  },
+  "operations": [
+    {
+      "operation": "upload_ioc",
+      "title": "Create IOC",
+      "description": "Creates an indicator on CrowdStrike Falcon based on the IOC type and value, policy, and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "create_ioc",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "IOC Type",
+          "name": "type",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "IPv4",
+            "IPv6",
+            "Domain",
+            "MD5",
+            "SHA256",
+            "SHA1"
+          ],
+          "description": "Type of indicator that you want to create on CrowdStrike Falcon.Valid types include: IPv4, IPv6, Domain, MD5, SHA1, and SHA256."
+        },
+        {
+          "title": "IOC Value",
+          "name": "value",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "value": "",
+          "tooltip": "The string representation of the indicator",
+          "description": "String representation of the indicator that you want to create on CrowdStrike Falcon.The value that you specify will be based on the IOC Type you have chosen."
+        },
+        {
+          "title": "Policy",
+          "name": "policy",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "value": "detect",
+          "tooltip": "The policy that should be enacted when the value is detected on a host",
+          "description": "Policy that should be enacted when the IOC value is detected on a host.Following is the list of policies:detect: Sends a notification when the particular indicator has been detected on a host.none: Take no action when the particular indicator has been detected on a host. This is equivalent to turning the indicator off."
+        },
+        {
+          "title": "Indicator Share Level",
+          "name": "share_level",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "value": "red",
+          "tooltip": "Currently only 'red' share level is supported",
+          "description": "(Optional) Level the indicator will be shared.Currently, only red share level (i.e., the indicator is not shared) is supported, which signifies that the IOC is not shared with other FH customers."
+        },
+        {
+          "title": "Time To Live",
+          "name": "expiration_days",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "integer",
+          "value": 30,
+          "tooltip": "Indicator lifetime in days",
+          "description": "(Optional) Days until when the indicator remains valid.Note: This parameter only applies to Domain, IPv4, and IPv6 IOC types."
+        },
+        {
+          "title": "Indicator Source",
+          "name": "source",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "description": "(Optional) Source of origination of the indicator that you want to create on CrowdStrike Falcon. This can be used for tracking where this indicator was defined.Note: The indicator source is limited to 200 characters."
+        },
+        {
+          "title": "Indicator Description",
+          "name": "description",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "description": "(Optional) Description of the indicator that you want to create on CrowdStrike Falcon.Note: Description is limited to 200 characters."
+        }
+      ],
+      "output_schema": {
+        "status": "",
+        "result": ""
+      }
+    },
+    {
+      "operation": "list_ioc",
+      "title": "Get IOCs",
+      "description": "Retrieves a list of all IOCs or specific IOCs based on the input parameters you have specified from CrowdStrike Falcon",
+      "category": "investigation",
+      "annotation": "list_ioc",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "IOC Type",
+          "name": "types",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "multiselect",
+          "options": [
+            "IPv4",
+            "IPv6",
+            "Domain",
+            "MD5",
+            "SHA256",
+            "SHA1"
+          ],
+          "description": "List containing the types of indicators whose IOC list you want to retrieve from CrowdStrike Falcon. You can select multiple indicator types.Valid types include: IPv4, IPv6, Domain, MD5, SHA1, and SHA256."
+        },
+        {
+          "title": "IOC Value",
+          "name": "values",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "value": "",
+          "tooltip": "CSV list of IOC values",
+          "description": "List of indicator values based on the types that you have selected in the IOC Type field whose IOC list you want to retrieve from CrowdStrike Falcon."
+        },
+        {
+          "title": "Policy",
+          "name": "policies",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "value": "",
+          "tooltip": "CSV list of policy",
+          "description": "List of indicator policies whose associated IOCs you want to retrieve from CrowdStrike Falcon."
+        },
+        {
+          "title": "Indicator Share Level",
+          "name": "share_levels",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "value": "red",
+          "tooltip": "CSV list of indicator share level",
+          "description": "(Optional) Level the indicator will be shared.Currently, only red share level (i.e., the indicator is not shared) is supported, which signifies that the IOC is not shared with other FH customers."
+        },
+        {
+          "title": "Indicator Source",
+          "name": "sources",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "value": "",
+          "tooltip": "CSV list of IOC sources",
+          "description": "(Optional) List of IOC sources you want to retrieve from CrowdStrike Falcon.Note: The indicator source is limited to 200 characters."
+        },
+        {
+          "title": "Earliest Expiration Date",
+          "name": "from.expiration_timestamp",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "datetime",
+          "value": "",
+          "tooltip": "YYYY-MM-DDThh:mm:ssZ (Eg. 2019-02-08T08:54:35.067Z)",
+          "description": "(Optional)RFC3339 DateTime that represents the starting date range to search for IOCs on CrowdStrike Falcon by their expiration timestamp."
+        },
+        {
+          "title": "Latest Expiration Date",
+          "name": "to.expiration_timestamp",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "datetime",
+          "value": "",
+          "tooltip": "YYYY-MM-DDThh:mm:ssZ (Eg. 2019-02-08T08:54:35.067Z)",
+          "description": "(Optional)RFC3339 DateTime that represents the ending date range to search for IOCs on CrowdStrike Falcon by their expiration timestamp."
+        },
+        {
+          "title": "Record Count",
+          "name": "limit",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "integer",
+          "value": 100,
+          "tooltip": "The maximum number of records to return",
+          "description": "(Optional) Number of items to be returned in a single request.Note: You can specify the minimum number as 1 and the maximum number of 500."
+        },
+        {
+          "title": "Offset",
+          "name": "offset",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "integer",
+          "value": 0,
+          "tooltip": "The offset to begin the list from",
+          "description": "(Optional) Index of the first item that this operation should return.This allows you to use a pagination token returned by the API to paginate a set of results and allows you to resume pagination without retrieving the already encountered items.For example, if you specify 10 in this parameter, then the operation will start from the 10th record, then and return the list."
+        }
+      ],
+      "output_schema": {
+        "iocs_found": ""
+      }
+    },
+    {
+      "operation": "get_ioc",
+      "title": "Get IOC Details",
+      "description": "Retrieves details of a specific IOC from CrowdStrike Falcon, based on the IOC type and value you have specified.",
+      "category": "investigation",
+      "annotation": "get_ioc",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "IOC Type",
+          "name": "ioc_type",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "IPv4",
+            "IPv6",
+            "Domain",
+            "MD5",
+            "SHA256",
+            "SHA1"
+          ],
+          "description": "Type of the indicator whose details you want to retrieve from CrowdStrike Falcon.Valid types include: IPv4, IPv6, Domain, MD5, SHA1, and SHA256."
+        },
+        {
+          "title": "IOC Value",
+          "name": "ioc_value",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "value": "",
+          "tooltip": "Specify IOC value as per IOC type",
+          "description": "String representation of the indicator whose details you want to retrieve from CrowdStrike Falcon.The value that you specify will be based on the IOC Type you have chosen."
+        }
+      ],
+      "output_schema": {
+        "ioc_details": {
+          "resources": [
+            {
+              "description": "",
+              "share_level": "",
+              "value": "",
+              "expiration_timestamp": "",
+              "modified_timestamp": "",
+              "modified_by": "",
+              "source": "",
+              "policy": "",
+              "type": "",
+              "created_by": "",
+              "created_timestamp": ""
+            }
+          ],
+          "errors": [],
+          "meta": {
+            "query_time": "",
+            "trace_id": ""
+          }
+        }
+      }
+    },
+    {
+      "operation": "update_ioc",
+      "title": "Update IOC",
+      "description": "Updates an indicator on CrowdStrike Falcon, based on the IOC type and value and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "update_ioc",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "IOC Type",
+          "name": "type",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "IPv4",
+            "IPv6",
+            "Domain",
+            "MD5",
+            "SHA256",
+            "SHA1"
+          ],
+          "description": "Type of indicator that you want to update on CrowdStrike Falcon.Valid types include: IPv4, IPv6, Domain, MD5, SHA1, and SHA256."
+        },
+        {
+          "title": "IOC Value",
+          "name": "value",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "value": "",
+          "tooltip": "The string representation of the indicator",
+          "description": "String representation of the indicator that you want to update on CrowdStrike Falcon.The value that you specify will be based on the IOC Type you have chosen."
+        },
+        {
+          "title": "Policy",
+          "name": "policy",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "value": "detect",
+          "tooltip": "The policy that should be enacted when the value is detected on a host",
+          "description": "(Optional)Policy that should be enacted when the IOC value is detected on a host.Following is the list of policies:detect: Sends a notification when the particular indicator has been detected on a host.none: Take no action when the particular indicator has been detected on a host. This is equivalent to turning the indicator off."
+        },
+        {
+          "title": "Indicator Share Level",
+          "name": "share_level",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "value": "red",
+          "tooltip": "Currently only 'red' share level is supported",
+          "description": "(Optional) Level the indicator will be shared.Currently, only red share level (i.e., the indicator is not shared) is supported, which signifies that the IOC is not shared with other FH customers."
+        },
+        {
+          "title": "Time To Live",
+          "name": "expiration_days",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "integer",
+          "value": 30,
+          "tooltip": "Indicator lifetime in days",
+          "description": "(Optional) Days until when the indicator remains valid.Note: This parameter only applies to Domain, IPv4, and IPv6 IOC types."
+        },
+        {
+          "title": "Indicator Source",
+          "name": "source",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "description": "(Optional) Source of origination of the indicator that you want to update on CrowdStrike Falcon. This can be used for tracking where this indicator was defined.Note: The indicator source is limited to 200 characters."
+        },
+        {
+          "title": "Indicator Description",
+          "name": "description",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "description": "(Optional) Description of the indicator that you want to update on CrowdStrike Falcon.Note: Description is limited to 200 characters."
+        }
+      ],
+      "output_schema": {
+        "status": "",
+        "result": ""
+      }
+    },
+    {
+      "operation": "delete_ioc",
+      "title": "Delete IOC",
+      "description": "Deletes an indicator on CrowdStrike Falcon, based on the IOC type and value you have specified.",
+      "category": "remediation",
+      "annotation": "delete_ioc",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "IOC Type",
+          "name": "type",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "IPv4",
+            "IPv6",
+            "Domain",
+            "MD5",
+            "SHA256",
+            "SHA1"
+          ],
+          "description": "Type of indicator that you want to delete from CrowdStrike Falcon.Valid types include: IPv4, IPv6, Domain, MD5, SHA1, and SHA256."
+        },
+        {
+          "title": "IOC Value",
+          "name": "value",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "value": "",
+          "tooltip": "The string representation of the indicator",
+          "description": "String representation of the indicator that you want to delete from CrowdStrike Falcon.The value that you specify will be based on the IOC Type you have chosen."
+        }
+      ],
+      "output_schema": {
+        "status": "",
+        "result": ""
+      }
+    },
+    {
+      "operation": "hunt_file",
+      "title": "Hunt File",
+      "description": "Hunts a file on CrowdStrike Falcon using the filehash type and value you have specified.",
+      "category": "investigation",
+      "annotation": "hunt_file",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Filehash Type",
+          "name": "hash_type",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "MD5",
+            "SHA256",
+            "SHA1"
+          ],
+          "description": "Type of the filehash that you want to hunt for on CrowdStrike Falcon."
+        },
+        {
+          "title": "Filehash Value",
+          "name": "hash_value",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "value": "",
+          "description": "Value of the filehash that you want to hunt for on CrowdStrike Falcon."
+        },
+        {
+          "title": "Get Device Count Only",
+          "name": "count_only",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "checkbox",
+          "value": false,
+          "description": "If you select this parameter, i.e., set it to True, then the response will contain only the number of devices found for that Filehash and value on CrowdStrike Falcon. For example, \"device_count\": 13If you clear this parameter, i.e., set it to False, then the response contains the list of device IDs found for that Filehash and value. For example, \"resources\": [ \"1081290fbf104a1465cc0c91ca4ebe36\", \"739e412d9ff341a549a75e5c8107b0f3\"])By default, this parameter is cleared, i.e., set as False."
+        }
+      ],
+      "output_schema": {
+        "device_count": ""
+      }
+    },
+    {
+      "operation": "hunt_domain",
+      "title": "Hunt Domain",
+      "description": "Hunts a domain on CrowdStrike Falcon using the domain value you have specified. This operation retrieves a list of device IDs from CrowdStrike Falcon on which the domain was observed.",
+      "category": "investigation",
+      "annotation": "hunt_domain",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Domain",
+          "name": "domain_value",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "value": "",
+          "description": "Value of the domain that you want to hunt for on CrowdStrike Falcon."
+        },
+        {
+          "title": "Get Device Count Only",
+          "name": "count_only",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "checkbox",
+          "value": false,
+          "description": "If you select this parameter, i.e., set it to True, then the response will contain only the number of devices found for that domain on CrowdStrike Falcon.If you clear this parameter, i.e., set it to False, then the response contains the list of device IDs found for that domain on CrowdStrike Falcon.By default, this parameter is cleared, i.e., set as False."
+        }
+      ],
+      "output_schema": {
+        "device_count": ""
+      }
+    },
+    {
+      "operation": "get_list_of_processes",
+      "title": "Get Processes Related to IOC",
+      "description": "Retrieves a list of processes from CrowdStrike Falcon which are associated with the specified IOC on given device based on the IOC type and value, device ID, and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "get_processes",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "IOC Type",
+          "name": "type",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "MD5",
+            "SHA256",
+            "SHA1",
+            "Domain"
+          ],
+          "value": "MD5",
+          "description": "Type of indicator whose associated processes you want to retrieve from CrowdStrike Falcon.Valid types include: IPv4, IPv6, Domain, MD5, SHA1, and SHA256."
+        },
+        {
+          "title": "IOC Value",
+          "name": "value",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "value": "",
+          "tooltip": "The string representation of the indicator",
+          "description": "String representation of the indicator whose associated processes you want to retrieve from CrowdStrike Falcon.The value that you specify will be based on the IOC Type you have chosen."
+        },
+        {
+          "title": "Device ID",
+          "name": "device_id",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "value": "",
+          "tooltip": "The device ID you want to specifically check against",
+          "description": "ID of the device against which you want to check for IOCs and associated processes on CrowdStrike Falcon."
+        },
+        {
+          "title": "Record Count",
+          "name": "limit",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "integer",
+          "tooltip": "The maximum number of records to return",
+          "description": "(Optional) Number of items to be returned in a single request.Note: You can specify the minimum number as 1 and the maximum number of 500."
+        },
+        {
+          "title": "Offset",
+          "name": "offset",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "integer",
+          "tooltip": "The offset to begin the list from",
+          "description": "(Optional) Index of the first item that this operation should return.This allows you to use a pagination token returned by the API to paginate a set of results and allows you to resume pagination without retrieving the already encountered items."
+        }
+      ],
+      "output_schema": {
+        "process_ids": [],
+        "process_count": ""
+      }
+    },
+    {
+      "operation": "process_details",
+      "title": "Get Process Details",
+      "description": "Retrieves details of a specific process from CrowdStrike Falcon, based on the process ID you have specified.",
+      "category": "investigation",
+      "annotation": "search_process",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Process ID",
+          "name": "ids",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "value": "",
+          "tooltip": "CSV list of ID of a process",
+          "placeholder": "['pid:2ddd67sdf74f1941a69b56185fb3c2:922186374411', 'pid:2ddd67j8d3d3e75bf4f7csd728f74:4295536142']",
+          "description": "ID of the process whose details you want to retrieve from CrowdStrike Falcon.This parameter allows you to send multiple IDs to the endpoint to allow for more efficient multi-get type operations."
+        }
+      ],
+      "output_schema": {
+        "process_details": {
+          "resources": [
+            {
+              "command_line": "",
+              "file_name": "",
+              "start_timestamp_raw": "",
+              "stop_timestamp": "",
+              "stop_timestamp_raw": "",
+              "process_id": "",
+              "device_id": "",
+              "process_id_local": "",
+              "start_timestamp": ""
+            }
+          ],
+          "meta": {
+            "trace_id": "",
+            "query_time": ""
+          },
+          "errors": []
+        }
+      }
+    },
+    {
+      "operation": "device_details",
+      "title": "Get Device Details",
+      "description": "Retrieves details of a specific device from CrowdStrike Falcon, based on the device ID you have specified.",
+      "category": "investigation",
+      "annotation": "search_endpoint",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "ids",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "value": "",
+          "placeholder": "['aaaa1111bbbb2', 'aaaa1111bbbb2']",
+          "tooltip": "CSV list of device ID",
+          "description": "ID of the device whose details you want to retrieve from CrowdStrike Falcon."
+        }
+      ],
+      "output_schema": {
+        "system_info": {
+          "meta": {
+            "trace_id": "",
+            "powered_by": "",
+            "query_time": ""
+          },
+          "resources": [
+            {
+              "agent_local_time": "",
+              "cid": "",
+              "device_id": "",
+              "config_id_platform": "",
+              "system_manufacturer": "",
+              "config_id_base": "",
+              "system_product_name": "",
+              "agent_load_flags": "",
+              "product_type": "",
+              "external_ip": "",
+              "os_version": "",
+              "platform_name": "",
+              "bios_manufacturer": "",
+              "bios_version": "",
+              "first_seen": "",
+              "policies": [
+                {
+                  "applied_date": "",
+                  "assigned_date": "",
+                  "applied": "",
+                  "policy_type": "",
+                  "policy_id": "",
+                  "settings_hash": ""
+                }
+              ],
+              "platform_id": "",
+              "device_policies": {
+                "prevention": {
+                  "applied_date": "",
+                  "assigned_date": "",
+                  "applied": "",
+                  "policy_type": "",
+                  "policy_id": "",
+                  "settings_hash": ""
+                },
+                "sensor_update": {
+                  "applied_date": "",
+                  "assigned_date": "",
+                  "applied": "",
+                  "policy_type": "",
+                  "policy_id": "",
+                  "settings_hash": ""
+                }
+              },
+              "last_seen": "",
+              "product_type_desc": "",
+              "machine_domain": "",
+              "meta": {
+                "version": ""
+              },
+              "config_id_build": "",
+              "modified_timestamp": "",
+              "mac_address": "",
+              "agent_version": "",
+              "major_version": "",
+              "local_ip": "",
+              "hostname": "",
+              "status": "",
+              "site_name": "",
+              "minor_version": ""
+            }
+          ],
+          "errors": []
+        }
+      }
+    },
+    {
+      "operation": "list_endpoint",
+      "title": "Get Endpoint List",
+      "description": "Retrieves a list of all the all endpoints or specific endpoints based on the input parameters you have specified configured on a device on CrowdStrike Falcon.",
+      "category": "investigation",
+      "annotation": "list_endpoint",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Query String",
+          "name": "filter_str",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Filter query apply to get endpoint",
+          "placeholder": "eg. product_type_desc:'Workstation'+status:'normal'",
+          "description": "Filter conditions based on which you want to filter the list of endpoints retrieved from CrowdStrike Falcon.All parameters listed under Detection Search API > Parameters can be used as filters."
+        },
+        {
+          "title": "Offset",
+          "name": "offset",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "integer",
+          "value": 0,
+          "tooltip": "The offset to begin the list from",
+          "description": "(Optional) Index of the first item that this operation should return.This allows you to use a pagination token returned by the API to paginate a set of results and allows you to resume pagination without retrieving the already encountered items."
+        },
+        {
+          "title": "Record Count",
+          "name": "limit",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "integer",
+          "value": 100,
+          "tooltip": "The maximum number of records to return",
+          "description": "Number of items to be returned in a single request.Note: You can specify the minimum number as 1 and the maximum number of 500."
+        }
+      ],
+      "output_schema": {
+        "list_of_endpoints": [],
+        "endpoint_count": ""
+      }
+    },
+    {
+      "operation": "quarantine_device",
+      "title": "Contain the Host",
+      "description": "Prevents a potentially compromised host from communicating across the network that contains the host based on the device ID you have specified.",
+      "category": "investigation",
+      "annotation": "quarantine_device",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device IDs",
+          "name": "ids",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Comma separated device IDs or list of device IDs.",
+          "placeholder": "eg. [\"abcd1234wxyz56\",\"fdbcd1234wxyz88\"]",
+          "description": "Comma-separated device IDs that needs to be quarantined from the network, i.e., the devices will now not be able to communicate across the network."
+        }
+      ],
+      "output_schema": {
+        "meta": {
+          "query_time": "",
+          "powered_by": "",
+          "trace_id": ""
+        },
+        "resources": [
+          {
+            "id": "",
+            "path": ""
+          }
+        ],
+        "errors": []
+      }
+    },
+    {
+      "operation": "remove_containment",
+      "title": "Remove Containment",
+      "description": "Removes the containment on a host that has been contained and returns its network communications to normal based on the device IDs you have specified.",
+      "category": "investigation",
+      "annotation": "remove_containment",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "name": "ids",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Comma separated detection IDs or list of detection IDs.",
+          "placeholder": "eg. [\"abcd1234wxyz56\",\"fbcd1234wxyz88\"]",
+          "description": "Comma-separated ID of the device IDs that needs to be un-quarantined from the network, i.e., the devices will now be able to communicate across the network."
+        }
+      ],
+      "output_schema": {
+        "meta": {
+          "query_time": "",
+          "powered_by": "",
+          "trace_id": ""
+        },
+        "resources": [
+          {
+            "id": "",
+            "path": ""
+          }
+        ],
+        "errors": []
+      }
+    },
+    {
+      "operation": "get_detection_details",
+      "title": "Get Detection Details",
+      "description": "Retrieves details of a specific detection from CrowdStrike Falcon, based on the detection IDs you have specified.",
+      "category": "investigation",
+      "annotation": "get_detection",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Detection ID",
+          "name": "ids",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "value": "",
+          "placeholder": "eg. [\"ldt:08602997a056431162e80133a872f492:803159697674\", \"ldt:08602997a056431162e80133a872f492:803159697674\"]",
+          "tooltip": "Comma separated detection IDs or list of detection IDs.",
+          "description": "Comma-separated detection IDs or list of detection IDs whose details you want to retrieve from CrowdStrike Falcon."
+        }
+      ],
+      "output_schema": {
+        "errors": [],
+        "meta": {
+          "powered_by": "",
+          "query_time": "",
+          "trace_id": ""
+        },
+        "resources": []
+      }
+    },
+    {
+      "operation": "detection_search",
+      "title": "Detection Search",
+      "description": "Retrieves a list of all detection IDs or specific detection IDs based on the input parameters you have specified configured on a device on CrowdStrike Falcon.",
+      "category": "investigation",
+      "annotation": "get_detection",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Severity",
+          "name": "max_severity_displayname",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "multiselect",
+          "options": [
+            "Critical",
+            "High",
+            "Medium",
+            "Low",
+            "Informational"
+          ],
+          "description": "Name used in the UI to determine the severity of the detection that you want to search on CrowdStrike Falcon. You can select multiple options.Valid values include: Critical, High, Medium, Low, and Informational."
+        },
+        {
+          "title": "Tactic",
+          "name": "behaviors.tactic",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "placeholder": "eg. Machine Learning, Malware",
+          "description": "Tactic for detection filtration on CrowdStrike Falcon."
+        },
+        {
+          "title": "Technique",
+          "name": "behaviors.technique",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "placeholder": "eg. Cloud Based ML, Sensor Based ML",
+          "description": "Technique for detection filtration on CrowdStrike Falcon."
+        },
+        {
+          "title": "Time",
+          "name": "last_behavior",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "multiselect",
+          "options": [
+            "Last Hour",
+            "Last Day",
+            "Last Week",
+            "Last 30 days",
+            "Last 90 days"
+          ],
+          "description": "Time, based on which you want to search for detections on CrowdStrike Falcon.You can choose from the following values: Last Hour, Last Day, Last Week, Last 30 days, and Last 90 days."
+        },
+        {
+          "title": "Status",
+          "name": "status",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "multiselect",
+          "options": [
+            "New",
+            "In Progress",
+            "True Positive",
+            "False Positive",
+            "Ignored"
+          ],
+          "description": "Current status of the detection that you want to search on CrowdStrike Falcon.You can select multiple options.Valid values include: New, In Progress, True Positive, False Positive, and Ignored."
+        },
+        {
+          "title": "Confidence",
+          "name": "max_confidence",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "integer",
+          "placeholder": 75,
+          "tooltip": "Value can be any integer between 1-100.",
+          "description": "When a detection has more than one associated behavior with varying confidence levels, this field captures the highest confidence value of all behaviors.You can specify any integer between 1-100 in this parameter."
+        },
+        {
+          "title": "Sort By",
+          "name": "sort",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Date Updated",
+            "Last Behaviour Descending",
+            "Last Behaviour Ascending"
+          ],
+          "description": "Sort detection records sort by any of the following values: Date Updated, Last Behaviour Descending, and Last Behaviour Ascending"
+        },
+        {
+          "title": "Triggering File",
+          "name": "filename.raw",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "placeholder": "eg. demo.exe",
+          "description": "Name of the file that has triggered the process."
+        },
+        {
+          "title": "Assigned to",
+          "name": "assigned_to_name",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "placeholder": "eg. demo@test.az",
+          "description": "Human-readable name of the user to whom the detection is currently assigned."
+        },
+        {
+          "title": "General Search",
+          "name": "q",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "value": "",
+          "tooltip": "Full text search across all metadata fields.",
+          "description": "Full-text search for detections across all metadata fields on CrowdStrike Falcon."
+        },
+        {
+          "title": "Query String",
+          "name": "filter_str",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "placeholder": "eg. hostinfo.active_directory_dn_display:'WIN-HPBKBMLLSST'",
+          "description": "Filter conditions based on which you want to filter the list of detections retrieved from CrowdStrike Falcon.All parameters listed under Detection Search API > Parameters can be used as filters."
+        },
+        {
+          "title": "Record Count",
+          "name": "limit",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "integer",
+          "value": 100,
+          "description": "Number of term buckets to be returned in a single request.Note: You can specify the minimum number as 1 and the maximum number of 500."
+        },
+        {
+          "title": "Offset",
+          "name": "offset",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "integer",
+          "value": 0,
+          "description": "(Optional) Index of the first item that this operation should return.This allows you to use a pagination token returned by the API to paginate a set of results and allows you to resume pagination without retrieving the already encountered items."
+        }
+      ],
+      "output_schema": {
+        "errors": [],
+        "meta": {
+          "pagination": {
+            "limit": "",
+            "offset": "",
+            "total": ""
+          },
+          "powered_by": "",
+          "query_time": "",
+          "trace_id": ""
+        },
+        "resources": []
+      }
+    },
+    {
+      "operation": "detection_aggregates",
+      "title": "Detection Aggregates",
+      "description": "Retrieves a count of detections by a query from CrowdStrike Falcon based on the aggregate query name and type, the field used to compute the aggregation and other input parameters you have specified.",
+      "category": "investigation",
+      "annotation": "detection_aggregates",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Name",
+          "name": "name",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Name of the aggregate query, as chosen by the user. Used to identify the results returned to you.",
+          "description": "Name of the aggregate query, as specified by the user.The name parameter is used to identify the results returned to you."
+        },
+        {
+          "title": "Aggregate Type",
+          "name": "type",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Date Histogram",
+            "Date Range",
+            "Terms",
+            "Range",
+            "Cardinality",
+            "Max",
+            "Min"
+          ],
+          "tooltip": "Type of aggregation",
+          "description": "Type of aggregation whose count you want to retrieve from CrowdStrike Falcon.Valid values include: Date Histogram, Date Range, Terms, Cardinality, Max, and Min."
+        },
+        {
+          "title": "Field",
+          "name": "field",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "placeholder": "eg. assigned_to_name or behaviors.scenario",
+          "tooltip": "The field on which to compute the aggregation",
+          "description": "Field on which you want to compute the aggregation of detections.All parameters listed under Detection Search API > Parameters can be used as fields for computing aggregations."
+        },
+        {
+          "title": "Time Interval",
+          "name": "interval",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "Year",
+            "Month",
+            "Week",
+            "Day",
+            "Hour",
+            "Minute"
+          ],
+          "tooltip": "If aggregate type is \"Date Histogram Time\" then time interval for date histogram aggregations is compulsory.",
+          "description": "Time interval for date histogram aggregations.Valid values include: Year, Month, Week, Day, Hour, and Minute."
+        },
+        {
+          "title": "Query Filter String",
+          "name": "filter",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "placeholder": "eg. \"status:[\"new\",\"in_progress\"]+max_severity_displayname:\"Critical\"+first_behavior:>\"now-90h\"\"",
+          "description": "Filter conditions based on which you want to filter the list of detections retrieved from CrowdStrike Falcon.All parameters listed under Detection Search API > Parameters can be used as filters."
+        },
+        {
+          "title": "General Search",
+          "name": "q",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "value": "",
+          "tooltip": "Full text search across all metadata fields.",
+          "description": "Full-text search for detections across all metadata fields on CrowdStrike Falcon."
+        },
+        {
+          "title": "Ranges",
+          "name": "ranges",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "placeholder": "[{\"From\": 0,\"To\": 70},{\"From\": 70,\"To\": 100}]",
+          "description": "Applies to range aggregations. Ranges values that you can specify will depend on the field that you have specified.For example, if max_severity is used, ranges can look like [{\"From\": 0,\"To\": 70},{\"From\": 70,\"To\": 100}]"
+        },
+        {
+          "title": "Date Ranges",
+          "name": "date_ranges",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "placeholder": "[{\"from\": \"2016-05-28T09:00:31Z\",\"to\": \"2016-05- 30T09:00:31Z\"},{\"from\": \"2016-06-01T09:00:31Z\",\"to\": \"2016-06-10T09:00:31Z\"}]",
+          "description": "Applies to date_range aggregations.For example, [{\"from\": \"2016-05-28T09:00:31Z\",\"to\": \"2016-05- 30T09:00:31Z\"},{\"from\": \"2016-06-01T09:00:31Z\",\"to\": \"2016-06-10T09:00:31Z\"}]"
+        },
+        {
+          "title": "Missing",
+          "name": "missing",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "value": "",
+          "placeholder": "eg. no_value or unassigned",
+          "description": "Missing is the value to be used when the aggregation field is missing from the object/document. In other words, the missing parameter defines how documents that are missing the value should be treated.By default, they will be ignored, but it is also possible to treat them as if they had a value."
+        },
+        {
+          "title": "Min Doc Count",
+          "name": "min_doc_count",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "integer",
+          "placeholder": 0,
+          "tooltip": "Only return buckets if values are greater than or equal to the value here.",
+          "description": "Only return term buckets if values are greater than or equal to the value that you have specified in this parameter."
+        },
+        {
+          "title": "Record Count",
+          "name": "size",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "integer",
+          "placeholder": 10,
+          "description": "Number of term buckets to be returned in a single request.Note: You can specify the minimum number as 1 and the maximum number of 500."
+        },
+        {
+          "title": "Sort By",
+          "name": "sort",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "placeholder": "max_first_behavior|desc",
+          "description": "Sort detection aggregations based on the value specified in this parameter."
+        },
+        {
+          "title": "Sub Aggregates",
+          "name": "sub_aggregates",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "placeholder": "[{\"name\": \"max_first_behavior\",\"type\": \"max\",\"field\": \"first_behavior\"}]",
+          "description": "Nested aggregation. You can specify a maximum of 3 nested aggregations per request.For example, \"sub_aggregates\" :[{\"name\": \"max_first_behavior\",\"type\": \"max\",\"field\": \"first_behavior\"}]\""
+        }
+      ],
+      "output_schema": {
+        "errors": [],
+        "meta": {
+          "powered_by": "",
+          "query_time": "",
+          "trace_id": ""
+        },
+        "resources": []
+      }
+    },
+    {
+      "operation": "update_detection",
+      "title": "Update Detection",
+      "description": "Updates specific detections in CrowdStrike Falcon, based on the detection IDs and other input parameters you have specified. ",
+      "category": "investigation",
+      "annotation": "update_detection",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Detection IDs",
+          "name": "ids",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "placeholder": "['ldt:cf54bb61f92e4d3e75bf4f7c11fc8f74:4295536142', 'ldt:cf54bb61f92e4d3e75bf4f7csd728f74:4295536142']",
+          "tooltip": "CSV of detection IDs or list of detection IDs",
+          "description": "IDs of the detections whose state you want to set on CrowdStrike Falcon.:Note: v2 of the CrowdStrike API, the CrowdStrike detection IDs are in the following format: ldt:[first field]:[second field] e.g. ldt:cf54bb61f92e4d3e75bf4f7c11fc8f74:4295536142 ."
+        },
+        {
+          "title": "Status",
+          "name": "status",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "New",
+            "In Progress",
+            "True Positive",
+            "False Positive",
+            "Ignored",
+            "Closed"
+          ],
+          "description": "Status to which you want to transition the specific detections.Valid values include: New, In Progress, True Positive, False Positive, Ignored and Closed."
+        },
+        {
+          "title": "Assigned To",
+          "name": "uid",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "placeholder": "e.g. example@example.com",
+          "tooltip": "Username to assign the detections to. This is usually user's email address.",
+          "description": "Names (email IDs) of users to whom you want to assign the specific detections. For example, example@example.com"
+        },
+        {
+          "title": "Comment",
+          "name": "comment",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "tooltip": "Used to provide context or notes for other Falcon users.",
+          "description": "Comment to add detections that you want to update in CrowdStrike Falcon. Comments are displayed with the detection in Falcon and are usually added to provide context or notes."
+        },
+        {
+          "title": "Show in UI",
+          "name": "show_in_ui",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "checkbox",
+          "value": false,
+          "tooltip": "Enable to displays the detection in the UI.",
+          "description": "Select this option, i.e., set it to 'true' to display the detections in the UI."
+        }
+      ],
+      "output_schema": {
+        "status": "",
+        "result": {
+          "meta": {
+            "writes": {
+              "resources_affected": ""
+            },
+            "query_time": "",
+            "trace_id": ""
+          }
+        }
+      }
+    },
+    {
+      "operation": "incidents_query",
+      "title": "Search Incidents",
+      "description": "Searches for incidents in CrowdStrike Falcon based on the FQL filter, sorting, and pagination details you have specified.",
+      "category": "investigation",
+      "annotation": "incidents_query",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Query String",
+          "name": "filter_str",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "description": "(Optional)Filter conditions based on which you want to filter the list of incidents retrieved from CrowdStrike Falcon."
+        },
+        {
+          "title": "Sort By",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "sort",
+          "description": "(Optional) Sort query that is used to perform the sorting operation over the result. In the sort query, specify the property to sort the results, followed by a dot (.), and then followed by the sort direction, either \"asc\" or \"desc\". ",
+          "value": ""
+        },
+        {
+          "title": "Record Count",
+          "name": "limit",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "integer",
+          "value": 100,
+          "tooltip": "You can specify the minimum number as 1 and the maximum number of 500.",
+          "description": "(Optional) Number of items to be returned in a single request. Note: You can specify the minimum number as 1 and the maximum number of 500. "
+        },
+        {
+          "title": "Offset",
+          "name": "offset",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "integer",
+          "value": 0,
+          "description": "(Optional) Index of the first item that this operation should return. This allows you to use a pagination token returned by the API to paginate a set of results and allows you to resume pagination without retrieving the already encountered items. For example, if you specify 10 in this parameter, then the operation will start from the 10th record, then and return the list."
+        }
+      ],
+      "output_schema": {
+        "errors": [
+          {
+            "code": "",
+            "id": "",
+            "message": ""
+          }
+        ],
+        "meta": {
+          "pagination": {
+            "limit": "",
+            "offset": "",
+            "total": ""
+          },
+          "powered_by": "",
+          "query_time": "",
+          "trace_id": "",
+          "writes": {
+            "resources_affected": ""
+          }
+        },
+        "resources": [
+        ]
+      }
+    },
+    {
+      "operation": "incidents_get_details",
+      "title": "Get Incident Details",
+      "description": "Retrieves details for incidents from CrowdStrike Falcon based on the incident IDs you have specified.",
+      "category": "investigation",
+      "annotation": "incidents_get_details",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Incident IDs",
+          "name": "ids",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "text",
+          "placeholder": "e.g. inc:62e9c3d557a5479258d9ac63a2efb118:131b500232ee4d9ca10c70d81eceb5dc",
+          "tooltip": "Comma separated incident ids or list of incident ids",
+          "description": "Comma-separated incident IDs or list of incident IDs whose details you want to retrieve from CrowdStrike Falcon."
+        }
+      ],
+      "output_schema": {
+        "resources": [
+          {
+            "assigned_to": "",
+            "assigned_to_name": "",
+            "cid": "",
+            "created": "",
+            "description": "",
+            "end": "",
+            "events_histogram": [
+              {
+                "count": "",
+                "has_detect": "",
+                "has_overwatch": "",
+                "has_prevented": "",
+                "timestamp_max": "",
+                "timestamp_min": ""
+              }
+            ],
+            "fine_score": "",
+            "host_ids": [],
+            "hosts": [
+              {
+                "agent_load_flags": "",
+                "agent_local_time": "",
+                "agent_version": "",
+                "bios_manufacturer": "",
+                "bios_version": "",
+                "cid": "",
+                "config_id_base": "",
+                "config_id_build": "",
+                "config_id_platform": "",
+                "device_id": "",
+                "external_ip": "",
+                "first_login_timestamp": "",
+                "first_login_user": "",
+                "first_seen": "",
+                "groups": [],
+                "hostname": "",
+                "last_login_timestamp": "",
+                "last_login_user": "",
+                "last_seen": "",
+                "local_ip": "",
+                "mac_address": "",
+                "machine_domain": "",
+                "major_version": "",
+                "minor_version": "",
+                "modified_timestamp": "",
+                "notes": [],
+                "os_version": "",
+                "ou": [],
+                "platform_id": "",
+                "platform_name": "",
+                "product_type": "",
+                "product_type_desc": "",
+                "release_group": "",
+                "site_name": "",
+                "status": "",
+                "system_manufacturer": "",
+                "system_product_name": "",
+                "tags": []
+              }
+            ],
+            "incident_id": "",
+            "incident_type": "",
+            "lm_host_ids": [],
+            "lm_hosts_capped": "",
+            "modified_timestamp": "",
+            "name": "",
+            "objectives": [],
+            "start": "",
+            "state": "",
+            "status": "",
+            "tactics": [],
+            "tags": [],
+            "techniques": [],
+            "users": [],
+            "visibility": ""
+          }
+        ],
+        "errors": [
+          {
+            "code": "",
+            "id": "",
+            "message": ""
+          }
+        ],
+        "meta": {
+          "pagination": {
+            "limit": "",
+            "offset": "",
+            "total": ""
+          },
+          "powered_by": "",
+          "query_time": "",
+          "trace_id": "",
+          "writes": {
+            "resources_affected": ""
+          }
+        }
+      }
+    },
+    {
+      "operation": "incidents_get_crowdscores",
+      "title": "Get Incidents Crowdstrike Score",
+      "description": "Returns entity (incident) data by querying the complete CrowdStrike Score environment based on the timestamp and CrowdStrike you have specified.",
+      "category": "investigation",
+      "annotation": "get_crowdstrikescore_incident",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Timestamp",
+          "name": "timestamp",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "datetime",
+          "tooltip": "The time at which the CrowdScore was calculated.",
+          "description": "Time at which the CrowdStrike score was calculated based on which you want to retrieve information about the incidents."
+        },
+        {
+          "title": "CrowdStrike Score",
+          "name": "score",
+          "visible": true,
+          "required": false,
+          "editable": true,
+          "type": "integer",
+          "placeholder": "eg. 55",
+          "description": "Value of the CrowdStrike Score based on which you want to retrieve information about the incidents."
+        }
+      ],
+      "output_schema": {}
+    },
+    {
+      "operation": "update_incidents",
+      "title": "Update Incidents Status",
+      "description": "Updates specific incidents in CrowdStrike Falcon, based on the incidents IDs and status you have specified.",
+      "category": "investigation",
+      "annotation": "update_incidents",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Incident IDs",
+          "name": "ids",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "placeholder": "e.g. inc:62e9c3d557a5479258d9ac63a2efb118:131b500232ee4d9ca10c70d81eceb5dc",
+          "tooltip": "Comma separated incident ids or list of incident ids",
+          "description": "Specify the comma-separated incident IDs or list of incident IDs whose status you want to update in CrowdStrike Falcon. "
+        },
+        {
+          "title": "Status",
+          "name": "status",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "select",
+          "options": [
+            "New",
+            "In Progress",
+            "Ignored",
+            "Closed"
+          ],
+          "description": "Select the status to which you want to update the specified incidents. Valid status values include: New, In Progress, Ignored, or Closed. "
+        }
+      ],
+      "output_schema": {
+        "result": ""
+    }
+    },
+    {
+      "operation": "get_uid",
+      "title": "Get User ID",
+      "description": "Retrieves the user ID from CrowdStrike Falcon based on the username you have specified.",
+      "category": "investigation",
+      "annotation": "get_uid",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Username",
+          "name": "uid",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "value": "",
+          "placeholder": "eg. test@example.com",
+          "tooltip": "This is usually the user's email address, but may vary based on your configuration.",
+          "description": "Specify the username whose user ID you want to retrieve from CrowdStrike Falcon. This is usually the user's email address; however, this could vary based on your configuration. For example, test@example.com "
+        }
+      ],
+      "output_schema": {
+        "errors": [
+          {
+            "code": "",
+            "id": "",
+            "message": ""
+          }
+        ],
+        "meta": {
+          "pagination": {
+            "limit": "",
+            "offset": "",
+            "total": ""
+          },
+          "powered_by": "",
+          "query_time": "",
+          "trace_id": "",
+          "writes": {
+            "resources_affected": ""
+          }
+        },
+        "resources": []
+      }
+    },
+    {
+      "operation": "get_user_details",
+      "title": "Get User Details",
+      "description": "Retrieves the details of a specific user from CrowdStrike Falcon based on the user ID you have specified.",
+      "category": "investigation",
+      "annotation": "get_user_details",
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "User ID",
+          "name": "ids",
+          "visible": true,
+          "required": true,
+          "editable": true,
+          "type": "text",
+          "value": "",
+          "description": "Specify the ID of the user whose details you want to retrieve from CrowdStrike Falcon. "
+        }
+      ],
+      "output_schema": {
+        "errors": [
+          {
+            "code": "",
+            "id": "",
+            "message": ""
+          }
+        ],
+        "meta": {
+          "pagination": {
+            "limit": "",
+            "offset": "",
+            "total": ""
+          },
+          "powered_by": "",
+          "query_time": "",
+          "trace_id": "",
+          "writes": {
+            "resources_affected": ""
+          }
+        },
+        "resources": [
+          {
+            "customer": "",
+            "firstName": "",
+            "lastName": "",
+            "uid": "",
+            "uuid": ""
+          }
+        ]
+      }
+    },
+    {
+      "operation": "list_usernames",
+      "title": "Get Usernames List",
+      "description": "Retrieves a list of usernames (usually an email address) for all users in your customer account from CrowdStrike Falcon. ",
+      "category": "investigation",
+      "annotation": "get_username_list",
+      "enabled": true,
+      "parameters": [],
+      "output_schema": {
+        "errors": [
+          {
+            "code": "",
+            "id": "",
+            "message": ""
+          }
+        ],
+        "meta": {
+          "pagination": {
+            "limit": "",
+            "offset": "",
+            "total": ""
+          },
+          "powered_by": "",
+          "query_time": "",
+          "trace_id": "",
+          "writes": {
+            "resources_affected": ""
+          }
+        },
+        "resources": []
+      }
+    },
+    {
+      "operation": "list_user_id",
+      "title": "Get User IDs List",
+      "description": "Retrieves a list of all user IDs in your customer account from CrowdStrike Falcon. ",
+      "category": "investigation",
+      "annotation": "get_user_id_list",
+      "enabled": true,
+      "parameters": [],
+      "output_schema": {
+        "errors": [
+          {
+            "code": "",
+            "id": "",
+            "message": ""
+          }
+        ],
+        "meta": {
+          "pagination": {
+            "limit": "",
+            "offset": "",
+            "total": ""
+          },
+          "powered_by": "",
+          "query_time": "",
+          "trace_id": "",
+          "writes": {
+            "resources_affected": ""
+          }
+        },
+        "resources": []
+      }
+    },
+    {
+      "operation": "admin_cmd_run",
+      "title": "Run Admin Command",
+      "description": "Executes admin commands on a specific device in CrowdStrike Falcon based on the device ID, commands, and optionally command parameters you have specified.",
+      "category": "investigation",
+      "annotation": "run_cmd",
+      "output_schema": {},
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "device_id",
+          "description": "ID of the device on which you want to execute the specified admin command using CrowdStrike Falcon Real-Time Response (RTR).",
+          "value": "",
+          "tooltip": "Device ID"
+        },
+        {
+          "title": "Command",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "command",
+          "value": "",
+          "description": "Valid commands that you want to execute on the specified device.",
+          "tooltip": "Command to be run on the device.(Case Sensitive)"
+        },
+        {
+          "title": "Command Argument",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "command_args",
+          "description": "Command arguments that can be added to the specified commands as additional parameters.",
+          "value": ""
+        },
+        {
+          "title": "Queue Offline",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "checkbox",
+          "name": "queue_offline",
+          "tooltip": "Enable to run the command on offline host",
+          "description": "Select this option, i.e., set to 'True', if you want to run the command on a host that is offline. By default, this option is cleared, i.e, set to 'False.' ",
+          "value": false
+        }
+      ]
+    },
+    {
+      "operation": "admin_cmd_result",
+      "title": "Get Admin Command Result",
+      "description": "Retrieves the result of the status of the admin command executed on a specific device from CrowdStrike Falcon Real-Time Response (RTR) based on the cloud request ID and sequence ID you have specified.",
+      "category": "investigation",
+      "annotation": "get_result",
+      "output_schema": {},
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Cloud Request ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "cloud_request_id",
+          "description": "ID of the request that is returned when you run the admin command on a specific device.",
+          "value": ""
+        },
+        {
+          "title": "Sequence ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "sequence_id",
+          "description": "ID of the sequence returned in the result content.",
+          "value": "0"
+        }
+      ]
+    },
+    {
+      "operation": "session_file_list",
+      "title": "Download Session File List",
+      "description": "Retrieves the list of the session files available for the download using CrowdStrike Falcon RTR based on the device ID you have specified.",
+      "category": "investigation",
+      "annotation": "list_files",
+      "output_schema": {},
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "device_id",
+          "description": "ID of the device whose associated session file list you want to download using CrowdStrike Falcon RTR.",
+          "value": "",
+          "tooltip": "Device ID"
+        }
+      ]
+    },
+    {
+      "operation": "session_file_download",
+      "title": "Download Session File",
+      "description": "Downloads a specific session file using CrowdStrike Falcon RTR based on the device ID, the file's SHA256 values, and other input parameters you have specified. ",
+      "category": "investigation",
+      "annotation": "download_file",
+      "output_schema": {},
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Device ID",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "device_id",
+          "description": "ID of the device whose associated session file you want to download using CrowdStrike Falcon RTR.",
+          "value": ""
+        },
+        {
+          "title": "File's SHA256 Value",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "sha256",
+          "description": "SHA256 value of the file that you want to download.",
+          "value": "",
+          "tooltip": "SHA256 value"
+        },
+        {
+          "title": "Download File Name",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "file_name",
+          "description": "Name to be given to the downloaded file. The filename specified here will also be used to upload the file to the FortiSOAR™ \"Attachments\" module.",
+          "value": ""
+        },
+        {
+          "title": "Additional Filter Parameters",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "json",
+          "name": "extra_params",
+          "description": "(Optional) Additional filter parameters that can be specified to search for the session file.",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "operation": "scripts_list",
+      "title": "Get Scripts List",
+      "description": "Retrieves a list of PowerShell scripts available for the \"runscript\" command from CrowdStrike Falcon. These scripts can then be run on devices using CrowdStrike Falcon RTR. ",
+      "category": "investigation",
+      "annotation": "get_scripts_list",
+      "output_schema": {},
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Filter",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "filter",
+          "description": "(Optional)FQL Filter based on which you want to filter PowerShell scripts. Based on the filter, this operation retrieves a list of PowerShell scripts from CrowdStrike Falcon.",
+          "value": ""
+        },
+        {
+          "title": "Offset",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "offset",
+          "description": "(Optional) Index of the first item that this operation should return.This allows you to use a pagination token returned by the API to paginate a set of results and allows you to resume pagination without retrieving the already encountered items.For example, if you specify 10 in this parameter, then the operation will start from the 10th record, then and return the list. ",
+          "value": "0"
+        },
+        {
+          "title": "Limit",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "description": "(Optional) Limits the number of results to be returned in a single request.",
+          "value": "10"
+        },
+        {
+          "title": "Sort By",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "sort",
+          "description": "(Optional) Sort query that is used to perform the sorting operation over the result. In the sort query, specify the property to sort the results, followed by a dot (.), and then followed by the sort direction, either \"asc\" or \"desc\".",
+          "value": "",
+          "placeholder": "Ex: 'created_at|asc’"
+        }
+      ]
+    },
+    {
+      "operation": "scripts_get",
+      "title": "Get Scripts Details by IDs",
+      "description": "Retrieves the PowerShell scripts available for the \"runscript\" command from CrowdStrike Falcon based on the script ID you have specified. These scripts can then be run on devices using CrowdStrike Falcon RTR. ",
+      "category": "investigation",
+      "annotation": "get_scripts",
+      "output_schema": {},
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Script File IDs",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "file_ids",
+          "description": "ID of the script files whose details you want to retrieve from CrowdStrike Falcon and which you want to run using the \"runscript\" command from CrowdStrike Falcon RTR. ",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "operation": "put_files_list",
+      "title": "Get Executable List",
+      "description": "Retrieves a list of Executable available for the \"runscript\" command from CrowdStrike Falcon. These executables can then be run on devices using CrowdStrike Falcon RTR. ",
+      "category": "investigation",
+      "annotation": "get_executable_list",
+      "output_schema": {},
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Filter",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "filter",
+          "description": "(Optional)FQL Filter based on which you want to filter Executable scripts. Based on the filter, this operation retrieves a list of Executable scripts from CrowdStrike Falcon.",
+          "value": ""
+        },
+        {
+          "title": "Offset",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "offset",
+          "description": "(Optional) Index of the first item that this operation should return. This allows you to use a pagination token returned by the API to paginate a set of results and allows you to resume pagination without retrieving the already encountered items. For example, if you specify 10 in this parameter, then the operation will start from the 10th record, then and return the list. ",
+          "value": "0"
+        },
+        {
+          "title": "Limit",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "integer",
+          "name": "limit",
+          "description": "(Optional) Limits the number of results to be returned in a single request.",
+          "value": "10"
+        },
+        {
+          "title": "Sort By",
+          "required": false,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "sort",
+          "description": "(Optional) Sort query that is used to perform the sorting operation over the result. In the sort query, specify the property to sort the results, followed by a dot (.), and then followed by the sort direction, either \"asc\" or \"desc\". ",
+          "value": "",
+          "placeholder": "Ex: 'created_at|asc’"
+        }
+      ]
+    },
+    {
+      "operation": "put_files_get",
+      "title": "Get Executables Details by IDs",
+      "description": "Retrieves the executables available for the \"runscript\" command from CrowdStrike Falcon based on the executable file ID you have specified. These executables can then be run on devices using CrowdStrike Falcon RTR.",
+      "category": "investigation",
+      "annotation": "get_file",
+      "output_schema": {},
+      "enabled": true,
+      "parameters": [
+        {
+          "title": "Executable File IDs",
+          "required": true,
+          "editable": true,
+          "visible": true,
+          "type": "text",
+          "name": "file_ids",
+          "description": "ID of the executable files whose details you want to retrieve from CrowdStrike Falcon and which you want to run using the \"runscript\" command from CrowdStrike Falcon RTR.",
+          "value": ""
+        }
+      ]
+    }
+  ]
+}

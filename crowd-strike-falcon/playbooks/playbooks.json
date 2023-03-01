@@ -1,0 +1,3967 @@
+{
+  "type": "workflow_collections",
+  "data": [
+    {
+      "@context": "/api/3/contexts/WorkflowCollection",
+      "@type": "WorkflowCollection",
+      "name": "Sample - CrowdStrike Falcon - 2.2.4",
+      "description": "Sample playbooks for \"CrowdStrike Falcon\" connector. If you are planning to use any of the sample playbooks in your environment, ensure that you clone those playbooks and move them to a different collection, since the sample playbook collection gets deleted during connector upgrade and delete.",
+      "visible": true,
+      "image": "/api/3/images/4542cf43-ac48-48f1-ab87-db196d564362",
+      "id": 130,
+      "createDate": 1675800413.210704,
+      "modifyDate": 1675800413.210704,
+      "deletedAt": null,
+      "importedBy": [],
+      "recordTags": [],
+      "workflows": [
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Run Admin Command",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Execute admin command on the device using its device ID. ",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/d1e940f5-88f8-4ab0-a0cc-59750758fdc6",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Run Admin Command",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "b0fbea20-612e-4176-8bb7-4590647bba54",
+                "params": {
+                  "command": "",
+                  "device_id": "",
+                  "command_args": ""
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "admin_cmd_run",
+                "operationTitle": "Run Admin Command",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "bd234e61-29c9-4304-b090-d61d31bcbe01"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "4436fb91-99af-419b-8a43-648f9421c2de",
+                "title": "CrowdStrike Falcon: Run Admin Command",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "d1e940f5-88f8-4ab0-a0cc-59750758fdc6"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Run Admin Command",
+              "targetStep": "/api/3/workflow_steps/bd234e61-29c9-4304-b090-d61d31bcbe01",
+              "sourceStep": "/api/3/workflow_steps/d1e940f5-88f8-4ab0-a0cc-59750758fdc6",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "6ac80b64-7aa8-4887-b47a-c1d90bfea958"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "0082a219-f540-4388-beb3-d54e6e4c71f1",
+          "id": 1475,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get IOCs",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Retrieves a list of all IOCs or specific IOCs based on the input parameters you have specified from CrowdStrike Falcon",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/e114629a-201e-4b23-b2de-d0c081e839a2",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get IOCs",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "b0fbea20-612e-4176-8bb7-4590647bba54",
+                "params": {
+                  "limit": 100,
+                  "types": "",
+                  "offset": "",
+                  "values": "",
+                  "sources": "",
+                  "policies": "",
+                  "share_levels": "red",
+                  "to.expiration_timestamp": "",
+                  "from.expiration_timestamp": ""
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "list_ioc",
+                "operationTitle": "Get IOCs",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "625d5ec6-2d3e-40e7-865e-474217822ba9"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "13e02f6b-dbae-40a7-b426-939684db30f3",
+                "title": "CrowdStrike Falcon: Get IOCs",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "e114629a-201e-4b23-b2de-d0c081e839a2"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get IOCs",
+              "targetStep": "/api/3/workflow_steps/625d5ec6-2d3e-40e7-865e-474217822ba9",
+              "sourceStep": "/api/3/workflow_steps/e114629a-201e-4b23-b2de-d0c081e839a2",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "aca6be33-60b3-4070-9f66-420cbd6cde22"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "0de2da43-14cb-46ed-9fe9-8d4134735136",
+          "id": 1468,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get User IDs List",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "List all user IDs in your customer account.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/6cab9be5-f493-4329-aa8c-8399e2017a41",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "ebbcd0ae-217a-4afe-b2f9-dc898a447432",
+                "title": "CrowdStrike Falcon: Get User IDs List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "6cab9be5-f493-4329-aa8c-8399e2017a41"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get User IDs List",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "''",
+                "params": [],
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "list_user_id",
+                "operationTitle": "Get User IDs List",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "e3fbac49-625e-4b4a-89cb-3fe653390205"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get User IDs List",
+              "targetStep": "/api/3/workflow_steps/e3fbac49-625e-4b4a-89cb-3fe653390205",
+              "sourceStep": "/api/3/workflow_steps/6cab9be5-f493-4329-aa8c-8399e2017a41",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "cd100c84-bb4c-48df-baff-68a6574c7555"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "1537833f-26bf-4a50-94d6-856506a86536",
+          "id": 1456,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Remove Containment",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Lift containment on that host to return its network communications to normal.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/0cd1db5a-e30c-4e57-8fba-a70a579f3bf1",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "59e4cbd6-5a9c-4b0a-bfa5-8063db70f104",
+                "title": "CrowdStrike Falcon: Remove Containment",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "0cd1db5a-e30c-4e57-8fba-a70a579f3bf1"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Remove Containment",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "b0fbea20-612e-4176-8bb7-4590647bba54",
+                "params": {
+                  "ids": ""
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "remove_containment",
+                "operationTitle": "Remove Containment",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "47fed975-811b-4589-858d-9ca06109eb7c"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Remove Containment",
+              "targetStep": "/api/3/workflow_steps/47fed975-811b-4589-858d-9ca06109eb7c",
+              "sourceStep": "/api/3/workflow_steps/0cd1db5a-e30c-4e57-8fba-a70a579f3bf1",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "564100cc-6ab6-47fd-87fb-c4d2b6ea4b74"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "1ccf1707-ae60-43f2-bdb1-756b49177e3d",
+          "id": 1451,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Detection Search",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Retrieves a list of all detection IDs or specific detection IDs based on the input parameters you have specified configured on a device on CrowdStrike Falcon.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/aacd1da6-3813-49e3-9b11-a1a87e6577f4",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Detection Search",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "b0fbea20-612e-4176-8bb7-4590647bba54",
+                "params": {
+                  "q": "",
+                  "sort": "",
+                  "limit": 100,
+                  "offset": "",
+                  "status": "",
+                  "filter_str": "",
+                  "detection_id": "",
+                  "filename.raw": "",
+                  "last_behavior": "",
+                  "max_confidence": "",
+                  "assigned_to_name": "",
+                  "behaviors.tactic": "",
+                  "behaviors.technique": "",
+                  "max_severity_displayname": ""
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "detection_search",
+                "operationTitle": "Detection Search",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "a3a2b370-7979-4597-99da-acaac8a3ced9"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "7ca543e2-7b0a-4c2b-a58c-f89aaf9b6569",
+                "title": "CrowdStrike Falcon: Detection Search",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "aacd1da6-3813-49e3-9b11-a1a87e6577f4"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Detection Search",
+              "targetStep": "/api/3/workflow_steps/a3a2b370-7979-4597-99da-acaac8a3ced9",
+              "sourceStep": "/api/3/workflow_steps/aacd1da6-3813-49e3-9b11-a1a87e6577f4",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "a06ff123-ae6c-4a1d-bfa4-86211c644932"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "1ddc5d20-2fb6-4115-9a6a-00786f3cb05a",
+          "id": 1469,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Processes Related to IOC",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Retrieves a list of processes from CrowdStrike Falcon which are associated with the specified IOC on given device based on the IOC type and value, device ID, and other input parameters you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/17aabdbf-5b47-4653-964b-e707facfa1a9",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "4dda0589-f02f-41d8-b024-afcb2afb390c",
+                "title": "CrowdStrike Falcon: Get Processes Related to IOC",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "17aabdbf-5b47-4653-964b-e707facfa1a9"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Processes Related to IOC",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "b0fbea20-612e-4176-8bb7-4590647bba54",
+                "params": {
+                  "type": "MD5",
+                  "limit": "",
+                  "value": "",
+                  "offset": "",
+                  "device_id": ""
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "get_list_of_processes",
+                "operationTitle": "Get Processes Related to IOC",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "76fbd13b-fd92-466e-8d3d-83f2bafb3841"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get Processes Related to IOC",
+              "targetStep": "/api/3/workflow_steps/76fbd13b-fd92-466e-8d3d-83f2bafb3841",
+              "sourceStep": "/api/3/workflow_steps/17aabdbf-5b47-4653-964b-e707facfa1a9",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "ac3ff011-a256-454c-bbdb-39e3602f931f"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "1e6f51bb-8619-4b28-b1ac-46aa5155c72a",
+          "id": 1458,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Admin Command Result",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Retrieves the result of the status of the admin command executed on the device from CrowdStrike Falcon RTR on the device ID you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/fafa757d-4f8f-4302-8ced-72f969db7b4f",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Admin Command Result",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "b0fbea20-612e-4176-8bb7-4590647bba54",
+                "params": {
+                  "sequence_id": "0",
+                  "cloud_request_id": ""
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "admin_cmd_result",
+                "operationTitle": "Get Admin Command Result",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "5926f5b8-20a4-4b09-9350-95d811f06ad8"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "6ca95800-48a5-40eb-9361-eb414c5f5e0c",
+                "title": "CrowdStrike Falcon: Get Admin Command Result",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "fafa757d-4f8f-4302-8ced-72f969db7b4f"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get Admin Command Result",
+              "targetStep": "/api/3/workflow_steps/5926f5b8-20a4-4b09-9350-95d811f06ad8",
+              "sourceStep": "/api/3/workflow_steps/fafa757d-4f8f-4302-8ced-72f969db7b4f",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "9db58082-783f-4532-9730-32fc1a3ff943"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "31e2cc30-f77a-4fa1-8b6f-313468d2eaa1",
+          "id": 1481,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Process Details",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Retrieves details of a specific process from CrowdStrike Falcon, based on the process ID you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/fd688571-5906-4c19-bd7c-ad37a268327f",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Process Details",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "b0fbea20-612e-4176-8bb7-4590647bba54",
+                "params": {
+                  "ids": ""
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "process_details",
+                "operationTitle": "Get Process Details",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "2aa8d10b-ece8-4731-81d2-0e3a84f7b4c9"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "554ddde3-aa54-45c9-b01e-7f52ae27a34c",
+                "title": "CrowdStrike Falcon: Get Process Details",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "fd688571-5906-4c19-bd7c-ad37a268327f"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get Process Details",
+              "targetStep": "/api/3/workflow_steps/2aa8d10b-ece8-4731-81d2-0e3a84f7b4c9",
+              "sourceStep": "/api/3/workflow_steps/fd688571-5906-4c19-bd7c-ad37a268327f",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "3a1f106e-df6e-4fc8-99e7-6d6b77478318"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "3545304f-80c8-4119-ba82-6f4b2c102244",
+          "id": 1453,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "> Crowdstrike Falcon > Fetch",
+          "aliasName": null,
+          "tag": "#crowd-strike-falcon #fetch #dataingestion",
+          "description": "Fetch Content Records from Microsoft Management Activity API.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/392eb55e-73dd-440a-8b24-653262d7ca89",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Fetch Detection Details from CrowdStrike",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "when": "{{vars.detection_ids|length > 0}}",
+                "config": "be8432a9-f85d-4df8-9177-81f875c120bb",
+                "params": {
+                  "ids": "{{vars.detection_ids}}"
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "get_detection_details",
+                "ignore_errors": false,
+                "operationTitle": "Get Detection Details",
+                "pickFromTenant": false,
+                "step_variables": []
+              },
+              "status": null,
+              "top": "840",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "0df3c2c6-771f-4c1e-a40a-d5aa74ff140e"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Set Result",
+              "description": null,
+              "arguments": {
+                "data": "{{vars.steps.Fetch_Detection_Details_from_CrowdStrike.data.resources}}",
+                "curr_timestamp": "{{vars.curr_timestamp}}",
+                "crowdstrikefalcon_macro_name": "{{vars.CrowdStrikeFalconLastRunTime}}"
+              },
+              "status": null,
+              "top": "975",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "1e4a9d9f-a9b2-48ed-825b-68f0606bf098"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": []
+                  },
+                  "_configuration_schema": "[\n  {\n    \"title\": \"Pull Detections Created in Last X min\",\n    \"required\": true,\n    \"editable\": true,\n    \"visible\": true,\n    \"type\": \"integer\",\n    \"name\": \"fetch_detection_in_last_X_minutes\"\n  },\n  {\n    \"title\": \"Severity\",\n    \"name\": \"max_severity_displayname\",\n    \"visible\": true,\n    \"required\": false,\n    \"editable\": true,\n    \"type\": \"multiselect\",\n    \"options\": [\n      \"Critical\",\n      \"High\",\n      \"Medium\",\n      \"Low\",\n      \"Informational\"\n    ],\n    \"description\": \"Name used in the UI to determine the severity of the detection that you want to search on CrowdStrike Falcon. You can select multiple options.Valid values include: Critical, High, Medium, Low, and Informational.\"\n  },\n  {\n    \"title\": \"Tactic\",\n    \"name\": \"behaviors_tactic\",\n    \"visible\": true,\n    \"required\": false,\n    \"editable\": true,\n    \"type\": \"text\",\n    \"placeholder\": \"eg. Machine Learning, Malware\",\n    \"description\": \"Tactic for detection filtration on CrowdStrike Falcon.\"\n  },\n  {\n    \"title\": \"Technique\",\n    \"name\": \"behaviors_technique\",\n    \"visible\": true,\n    \"required\": false,\n    \"editable\": true,\n    \"type\": \"text\",\n    \"placeholder\": \"eg. Cloud Based ML, Sensor Based ML\",\n    \"description\": \"Technique for detection filtration on CrowdStrike Falcon.\"\n  },\n  {\n    \"title\": \"Status\",\n    \"name\": \"status\",\n    \"visible\": true,\n    \"required\": false,\n    \"editable\": true,\n    \"type\": \"multiselect\",\n    \"options\": [\n      \"New\",\n      \"In Progress\",\n      \"True Positive\",\n      \"False Positive\",\n      \"Ignored\"\n    ],\n    \"description\": \"Current status of the detection that you want to search on CrowdStrike Falcon.You can select multiple options.Valid values include: New, In Progress, True Positive, False Positive, and Ignored.\"\n  },\n  {\n    \"title\": \"Confidence\",\n    \"name\": \"max_confidence\",\n    \"visible\": true,\n    \"required\": false,\n    \"editable\": true,\n    \"type\": \"integer\",\n    \"placeholder\": 75,\n    \"tooltip\": \"Value can be any integer between 1-100.\",\n    \"description\": \"When a detection has more than one associated behavior with varying confidence levels, this field captures the highest confidence value of all behaviors.You can specify any integer between 1-100 in this parameter.\"\n  },\n  {\n    \"title\": \"Fetch Query\",\n    \"name\": \"filter_str\",\n    \"visible\": true,\n    \"required\": false,\n    \"editable\": true,\n    \"type\": \"text\",\n    \"placeholder\": \"eg. hostinfo.active_directory_dn_display:'WIN-HPBKBMLLSST'\",\n    \"description\": \"Filter conditions based on which you want to filter the list of detections retrieved from CrowdStrike Falcon.All parameters listed under Detection Search API > Parameters can be used as filters.\"\n  },\n  {\n    \"title\": \"Record Count\",\n    \"name\": \"limit\",\n    \"visible\": true,\n    \"required\": false,\n    \"editable\": true,\n    \"type\": \"integer\",\n    \"value\": 100,\n    \"description\": \"Number of term buckets to be returned in a single request.Note: You can specify the minimum number as 1 and the maximum number of 500.\"\n  }\n]"
+                }
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "392eb55e-73dd-440a-8b24-653262d7ca89"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Fetch Detections from CrowdStrike Falcon",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "be8432a9-f85d-4df8-9177-81f875c120bb",
+                "params": {
+                  "q": "",
+                  "sort": "Last Behaviour Ascending",
+                  "limit": "{{vars.limit}}",
+                  "offset": 0,
+                  "status": "{{vars.status}}",
+                  "filter_str": "created_timestamp:>'{{vars.last_pull_time}}'+{{vars.filter_str}}",
+                  "detection_id": "",
+                  "filename.raw": "",
+                  "last_behavior": "",
+                  "max_confidence": "{{vars.max_confidence}}",
+                  "assigned_to_name": "",
+                  "behaviors.tactic": "{{vars.behaviors_tactic}}",
+                  "behaviors.technique": "{{vars.behaviors_technique}}",
+                  "max_severity_displayname": "{{vars.max_severity_displayname}}"
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "detection_search",
+                "operationTitle": "Detection Search",
+                "pickFromTenant": false,
+                "step_variables": {
+                  "detection_ids": "{{vars.result.data.resources}}"
+                }
+              },
+              "status": null,
+              "top": "705",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "42a3d5fc-727c-467f-a8fc-a8b7dfe3f027"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Set Time Configuration",
+              "description": null,
+              "arguments": {
+                "curr_timestamp": "{{arrow.utcnow().format('YYYY-MM-DDTHH:mm:ss.SSS')}}Z",
+                "last_pull_time": "{% if vars.steps.Get_Macro_Value.data['hydra:member'][0]['value'] == \"initial\" %}{{arrow.utcnow().shift(minutes =- (vars.fetch_detection_in_last_X_minutes)).format('YYYY-MM-DDTHH:mm:ss.SSS')}}Z{% else %} {{- vars.steps.Get_Macro_Value.data['hydra:member'][0]['value']}}{% endif %}"
+              },
+              "status": null,
+              "top": "570",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "5f6d2314-ed1b-4f6b-a90f-f18b3bfcb3fe"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Macro Value",
+              "description": null,
+              "arguments": {
+                "params": {
+                  "iri": "/api/wf/api/dynamic-variable/?format=json&name={{vars.CrowdStrikeFalconLastRunTime}}",
+                  "body": "",
+                  "method": "GET"
+                },
+                "version": "3.1.2",
+                "connector": "cyops_utilities",
+                "operation": "make_cyops_request",
+                "operationTitle": "FSR: Make FortiSOAR API Call",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "435",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+              "group": null,
+              "uuid": "694179d8-7221-4b86-9f1d-11ae8a7b88ed"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Configuration",
+              "description": null,
+              "arguments": {
+                "limit": "",
+                "query": "",
+                "status": [
+                  "New"
+                ],
+                "filter_str": "",
+                "max_confidence": "",
+                "behaviors_tactic": "",
+                "behaviors_technique": [],
+                "max_severity_displayname": [],
+                "CrowdStrikeFalconLastRunTime": "CrowdStrikFalconLastRunQueryTime_{{vars['audit_info']['cyops_playbook_iri'].split('/')[-1].replace('-','_')}}",
+                "fetch_detection_in_last_X_minutes": 30
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "c3566d09-671d-4f25-92f0-cb25c7025564"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Environment Setup",
+              "description": null,
+              "arguments": {
+                "when": "{{vars.request.env_setup}}",
+                "arguments": {
+                  "overrideIfNoMatch": "false",
+                  "CrowdStrikeFalconMacroName": "{{vars.CrowdStrikeFalconLastRunTime}}",
+                  "CrowdStrikeFalconMacroValue": "initial"
+                },
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "/api/3/workflows/b795a220-7b0f-4581-acd1-ec575320d1fc"
+              },
+              "status": null,
+              "top": "300",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+              "group": null,
+              "uuid": "fd7edadb-ac1b-4403-a370-018adc7e75e7"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Fetch Detections from CrowdStrike Falcon -> Copy  of Fetch Detections from CrowdStrike Falcon",
+              "targetStep": "/api/3/workflow_steps/0df3c2c6-771f-4c1e-a40a-d5aa74ff140e",
+              "sourceStep": "/api/3/workflow_steps/42a3d5fc-727c-467f-a8fc-a8b7dfe3f027",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "2f498d2c-1070-4e8b-9acf-216a3707127d"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Fetch Detection Details from CrowdStrike -> Set Result",
+              "targetStep": "/api/3/workflow_steps/1e4a9d9f-a9b2-48ed-825b-68f0606bf098",
+              "sourceStep": "/api/3/workflow_steps/0df3c2c6-771f-4c1e-a40a-d5aa74ff140e",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "63021d43-de1d-4962-aa36-f414b2abe0af"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Environment Setup -> Get Macro Value",
+              "targetStep": "/api/3/workflow_steps/694179d8-7221-4b86-9f1d-11ae8a7b88ed",
+              "sourceStep": "/api/3/workflow_steps/fd7edadb-ac1b-4403-a370-018adc7e75e7",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "84ba2637-4641-456a-b479-6e8764110f5f"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Get Macro Value -> Evaluate Time",
+              "targetStep": "/api/3/workflow_steps/5f6d2314-ed1b-4f6b-a90f-f18b3bfcb3fe",
+              "sourceStep": "/api/3/workflow_steps/694179d8-7221-4b86-9f1d-11ae8a7b88ed",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "ba111e7c-64cd-4a4c-80ec-4230a2e2fd2d"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Set Time Configuration -> Fetch Detections from CrowdStrike Falcon",
+              "targetStep": "/api/3/workflow_steps/42a3d5fc-727c-467f-a8fc-a8b7dfe3f027",
+              "sourceStep": "/api/3/workflow_steps/5f6d2314-ed1b-4f6b-a90f-f18b3bfcb3fe",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "c334987f-ff21-4c52-a127-c3bc403a12ce"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Configuration",
+              "targetStep": "/api/3/workflow_steps/c3566d09-671d-4f25-92f0-cb25c7025564",
+              "sourceStep": "/api/3/workflow_steps/392eb55e-73dd-440a-8b24-653262d7ca89",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "df2854a8-cef4-4090-8f4a-af1fee3e5ff8"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Configuration -> Environment Setup",
+              "targetStep": "/api/3/workflow_steps/fd7edadb-ac1b-4403-a370-018adc7e75e7",
+              "sourceStep": "/api/3/workflow_steps/c3566d09-671d-4f25-92f0-cb25c7025564",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "eaf49d92-d665-4f81-a166-332341fc9782"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "39acf36e-ddd4-4f18-a13b-3fe78ac808ba",
+          "id": 1454,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "dataingestion",
+            "fetch",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Update Incidents Status",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Updates specific incidents in CrowdStrike Falcon, based on the incidents IDs and status you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/849df3f4-0ed8-4b30-a237-45752b1d41d3",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Update Incidents Status",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "''",
+                "params": [],
+                "version": "2.2.1",
+                "connector": "crowd-strike-falcon",
+                "operation": "update_incidents",
+                "operationTitle": "Update Incidents Status",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "7336092b-3618-485d-b187-d7ae47eecdd7"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "dc84c9c8-3c88-4505-b1f3-847fae33556d",
+                "title": "CrowdStrike Falcon: Update Incidents Status",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "849df3f4-0ed8-4b30-a237-45752b1d41d3"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start-> Update Incidents Status",
+              "targetStep": "/api/3/workflow_steps/7336092b-3618-485d-b187-d7ae47eecdd7",
+              "sourceStep": "/api/3/workflow_steps/849df3f4-0ed8-4b30-a237-45752b1d41d3",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "33620063-b365-4e6e-a950-f61871015ccf"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "3f6c7484-6e8f-4781-a049-cdf56f89e5c3",
+          "id": 1460,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowdstrike-intel"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Executable List",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "List Executable files available for \"run\" command",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/a99c2912-15bd-4813-b169-4fb9af3f397d",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Executable List",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "b0fbea20-612e-4176-8bb7-4590647bba54",
+                "params": {
+                  "sort": "",
+                  "limit": "10",
+                  "filter": "",
+                  "offset": "0"
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "put_files_list",
+                "operationTitle": "Get Executable List",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "6b39dc47-b419-4629-8791-94cdde3a4f8b"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "0d9bc442-60aa-4a0f-8910-7549aab27113",
+                "title": "CrowdStrike Falcon: Get Executable List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "a99c2912-15bd-4813-b169-4fb9af3f397d"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get Executable List",
+              "targetStep": "/api/3/workflow_steps/6b39dc47-b419-4629-8791-94cdde3a4f8b",
+              "sourceStep": "/api/3/workflow_steps/a99c2912-15bd-4813-b169-4fb9af3f397d",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "e1bc012b-f863-44c4-94d8-dac5d829b0ed"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "40d4df38-ea1d-4404-b5a4-0646eb392ab4",
+          "id": 1480,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Scripts List",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "List PowerShell scripts available for \"runscript\" command. Which can be run on the device.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/519b3289-e120-40b1-b7f6-9b431803240d",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "ac28ae18-b692-474e-87bf-e1b28a737739",
+                "title": "CrowdStrike Falcon: Get Script List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "519b3289-e120-40b1-b7f6-9b431803240d"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Scripts List",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "a2415701-51ba-4c3b-b828-7d266abbaba8",
+                "params": {
+                  "sort": "",
+                  "limit": "10",
+                  "filter": "",
+                  "offset": "0"
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "scripts_list",
+                "operationTitle": "List Scripts",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "62c8edba-cce0-48e5-9e53-2ef0d2f8d47c"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> List Scripts",
+              "targetStep": "/api/3/workflow_steps/62c8edba-cce0-48e5-9e53-2ef0d2f8d47c",
+              "sourceStep": "/api/3/workflow_steps/519b3289-e120-40b1-b7f6-9b431803240d",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "ac5c72da-e60a-41d5-8acb-c4ca61990faf"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "46287e37-2fbb-4cc5-b4ef-ed68cbb59c48",
+          "id": 1473,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Executables Details by IDs ",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Retrieves the executable using their IDs you have specified. Which will be run using \"runscript\" command..",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/91a10d82-2c20-498e-a83f-6fdc3de68825",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Executables Details by IDs ",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "b0fbea20-612e-4176-8bb7-4590647bba54",
+                "params": {
+                  "file_ids": ""
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "put_files_get",
+                "operationTitle": "Get Executables Details by IDs ",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "6563fa87-9ef8-495e-925d-1450283ed81a"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "ddae2b97-1012-48ba-ade4-7c1b8e1f8366",
+                "title": "CrowdStrike Falcon: Get Executables Details by IDs ",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "91a10d82-2c20-498e-a83f-6fdc3de68825"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get Executables Details by IDs ",
+              "targetStep": "/api/3/workflow_steps/6563fa87-9ef8-495e-925d-1450283ed81a",
+              "sourceStep": "/api/3/workflow_steps/91a10d82-2c20-498e-a83f-6fdc3de68825",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "e090eb0d-5752-4840-bc9e-a0133fb2a44c"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "4c657527-1303-43f5-a0ec-2aa282ddeb96",
+          "id": 1476,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "CrowdStrike Falcon > Ingest",
+          "aliasName": null,
+          "tag": "#crowd-strike-falcon #ingest #dataingestion #create",
+          "description": "Fetch Detections/Incidents from the Crowdstrike Falcon and Creates records in FortiSOAR.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/8e36b3b2-2360-428e-bc62-c702dba52361",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "ff5a171c-e6c9-468e-9c63-713c44852410",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records}}"
+                  }
+                },
+                "displayConditions": {
+                  "alerts": {
+                    "sort": [],
+                    "limit": 30,
+                    "logic": "AND",
+                    "filters": []
+                  }
+                },
+                "executeButtonText": "Execute",
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "30",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "8e36b3b2-2360-428e-bc62-c702dba52361"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Fetch Detections",
+              "description": null,
+              "arguments": {
+                "arguments": [],
+                "apply_async": false,
+                "step_variables": [],
+                "workflowReference": "/api/3/workflows/39acf36e-ddd4-4f18-a13b-3fe78ac808ba"
+              },
+              "status": null,
+              "top": "165",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/74932bdc-b8b6-4d24-88c4-1a4dfbc524f3",
+              "group": null,
+              "uuid": "94dedb27-8036-487b-9a34-8e5fd50a92d9"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Update Last Detection Fetch Macro",
+              "description": null,
+              "arguments": {
+                "config": "32a9a084-8135-41bb-8649-569c45d80505",
+                "params": {
+                  "macro": "{{vars.steps.Fetch_Detections.crowdstrikefalcon_macro_name}}",
+                  "value": "{{vars.steps.Fetch_Detections.curr_timestamp}}"
+                },
+                "version": "3.1.2",
+                "connector": "cyops_utilities",
+                "operation": "updatemacro",
+                "operationTitle": "CyOPs: Update Macro",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "570",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+              "group": null,
+              "uuid": "9f22a463-cbbe-4e16-b5e6-496f566ddfd2"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Configuration",
+              "description": null,
+              "arguments": {
+                "alerts_type_map": "{}",
+                "alerts_status_map": "{}",
+                "alerts_severity_map": "{'new,High,Medium,High': {{'Severity'| picklist('Minimal') }}}",
+                "alerts_ackSlaStatus_map": "{}",
+                "alerts_closureReason_map": "{}",
+                "alerts_respSlaStatus_map": "{}",
+                "alerts_escalatedtoincident_map": "{}"
+              },
+              "status": null,
+              "top": "300",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "bd7c21af-fdff-4768-b742-e8db3b358b2e"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Create Record",
+              "description": null,
+              "arguments": {
+                "when": "{{vars.steps.Fetch_Detections.data|length > 0}}",
+                "for_each": {
+                  "item": "{{vars.steps.Fetch_Detections.data}}",
+                  "__bulk": true,
+                  "condition": "",
+                  "batch_size": 100
+                },
+                "resource": {
+                  "name": "Detection ID: {{vars.item[\"detection_id\"]}}",
+                  "source": "CrowdStrike Falcon",
+                  "status": null,
+                  "severity": "{{vars.item[\"max_severity_displayname\"] | resolveRange(vars.alerts_severity_map)}}",
+                  "sourceId": "{{vars.item[\"detection_id\"]}}",
+                  "__replace": "true",
+                  "eventTime": "{{vars.item[\"created_timestamp\"]}}",
+                  "sourcedata": "{{vars.item | toJSON }}",
+                  "description": "Detection ID : {{vars.item[\"detection_id\"]}}\nMax Confidence : {{vars.item[\"max_confidence\"]}}\nMax Severity : {{vars.item[\"max_severity\"]}}\nLast Behavior : {{vars.item[\"last_behavior\"]}}\nFirst Behavior : {{vars.item[\"first_behavior\"]}}",
+                  "userDetails": "{{vars.item[\"UserId\"]}}  :  {{vars.item[\"UserKey\"]}}",
+                  "ackSlaStatus": {
+                    "id": 7,
+                    "@id": "/api/3/picklists/090115d7-90fc-4dc6-97ca-27950fc30c1c",
+                    "icon": null,
+                    "uuid": "090115d7-90fc-4dc6-97ca-27950fc30c1c",
+                    "@type": "Picklist",
+                    "color": "#14b341",
+                    "display": "Met",
+                    "@context": "/api/3/contexts/Picklist",
+                    "listName": "/api/3/picklist_names/fe36a8f2-fcba-4221-b4ab-1081f596b153",
+                    "itemValue": "Met",
+                    "orderIndex": 0
+                  },
+                  "computerName": "{{vars.item[\"device\"][\"hostname\"]}}",
+                  "closureReason": {
+                    "id": 250,
+                    "@id": "/api/3/picklists/8590c81e-3307-4645-97f5-c3e1bec4e05a",
+                    "icon": null,
+                    "uuid": "8590c81e-3307-4645-97f5-c3e1bec4e05a",
+                    "@type": "Picklist",
+                    "color": null,
+                    "display": "Tasks Completed",
+                    "@context": "/api/3/contexts/Picklist",
+                    "listName": "/api/3/picklist_names/4ebacea1-88cd-4ea8-9dcc-385bea42cc59",
+                    "itemValue": "Tasks Completed",
+                    "orderIndex": 0
+                  },
+                  "respSlaStatus": {
+                    "id": 7,
+                    "@id": "/api/3/picklists/090115d7-90fc-4dc6-97ca-27950fc30c1c",
+                    "icon": null,
+                    "uuid": "090115d7-90fc-4dc6-97ca-27950fc30c1c",
+                    "@type": "Picklist",
+                    "color": "#14b341",
+                    "display": "Met",
+                    "@context": "/api/3/contexts/Picklist",
+                    "listName": "/api/3/picklist_names/fe36a8f2-fcba-4221-b4ab-1081f596b153",
+                    "itemValue": "Met",
+                    "orderIndex": 0
+                  },
+                  "escalatedtoincident": {
+                    "id": 31,
+                    "@id": "/api/3/picklists/2128a09c-153d-4db3-985d-de6be33deae5",
+                    "icon": null,
+                    "uuid": "2128a09c-153d-4db3-985d-de6be33deae5",
+                    "@type": "Picklist",
+                    "color": "#808080",
+                    "display": "No",
+                    "@context": "/api/3/contexts/Picklist",
+                    "listName": "/api/3/picklist_names/e131cc54-9ae4-43c9-b830-af6e331fe024",
+                    "itemValue": "No",
+                    "orderIndex": 1
+                  }
+                },
+                "_showJson": false,
+                "operation": "Overwrite",
+                "collection": "/api/3/upsert/alerts",
+                "__recommend": [],
+                "fieldOperation": {
+                  "recordTags": "Overwrite"
+                },
+                "step_variables": []
+              },
+              "status": null,
+              "top": "435",
+              "left": "125",
+              "stepType": "/api/3/workflow_step_types/2597053c-e718-44b4-8394-4d40fe26d357",
+              "group": null,
+              "uuid": "dc5611d3-a90d-47d4-ada2-017172efb41c"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Create Record -> Update Last Alert Fetch Macro",
+              "targetStep": "/api/3/workflow_steps/9f22a463-cbbe-4e16-b5e6-496f566ddfd2",
+              "sourceStep": "/api/3/workflow_steps/dc5611d3-a90d-47d4-ada2-017172efb41c",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "0987edaa-94cf-454d-ad84-ea91c3e038be"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Configuration -> Create Record",
+              "targetStep": "/api/3/workflow_steps/dc5611d3-a90d-47d4-ada2-017172efb41c",
+              "sourceStep": "/api/3/workflow_steps/bd7c21af-fdff-4768-b742-e8db3b358b2e",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "1371d90f-e3df-4527-9ffb-2798b81ba463"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Fetch Alerts",
+              "targetStep": "/api/3/workflow_steps/94dedb27-8036-487b-9a34-8e5fd50a92d9",
+              "sourceStep": "/api/3/workflow_steps/8e36b3b2-2360-428e-bc62-c702dba52361",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "4aeebb0a-4f02-4b9c-b987-230bffe54268"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Fetch Alerts -> Configuration",
+              "targetStep": "/api/3/workflow_steps/bd7c21af-fdff-4768-b742-e8db3b358b2e",
+              "sourceStep": "/api/3/workflow_steps/94dedb27-8036-487b-9a34-8e5fd50a92d9",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "7a7fb246-3d2d-4cba-bd19-08022ab1a22d"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "5305b1d0-20f7-4992-9679-79c9c4680a39",
+          "id": 1448,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "dataingestion",
+            "create",
+            "ingest",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Detection Details",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Retrieves details of a specific detection from CrowdStrike Falcon, based on the detection IDs you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/17530a16-496a-450d-8e45-c59cf78bba6a",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Detection Details",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "b0fbea20-612e-4176-8bb7-4590647bba54",
+                "params": {
+                  "ids": ""
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "get_detection_details",
+                "operationTitle": "Get Detection Details",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "06596c9d-7ad9-4c76-a405-c439e314b33e"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "0a4eb4f3-9446-45d3-90b4-e2489a2ff956",
+                "title": "CrowdStrike Falcon: Get Detection Details",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "17530a16-496a-450d-8e45-c59cf78bba6a"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get Detection Details",
+              "targetStep": "/api/3/workflow_steps/06596c9d-7ad9-4c76-a405-c439e314b33e",
+              "sourceStep": "/api/3/workflow_steps/17530a16-496a-450d-8e45-c59cf78bba6a",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "2a53d392-f6e2-40d7-8c3f-bca372eefc4d"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "567c8c74-b9ad-46e5-a8c8-37a5fd2a3b3f",
+          "id": 1477,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Delete IOC",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Deletes an indicator on CrowdStrike Falcon, based on the IOC type and value you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/1d98c55e-d631-4287-b42d-ae031d6f400a",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "04c52d8b-4443-4123-9ac5-0c053af79ebb",
+                "title": "CrowdStrike Falcon: Delete IOC",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "1d98c55e-d631-4287-b42d-ae031d6f400a"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Delete IOC",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "b0fbea20-612e-4176-8bb7-4590647bba54",
+                "params": {
+                  "type": "",
+                  "value": ""
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "delete_ioc",
+                "operationTitle": "Delete IOC",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "6bc7510b-e7d5-4b43-8433-b4aac59d680b"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Delete IOC",
+              "targetStep": "/api/3/workflow_steps/6bc7510b-e7d5-4b43-8433-b4aac59d680b",
+              "sourceStep": "/api/3/workflow_steps/1d98c55e-d631-4287-b42d-ae031d6f400a",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "065c6fa2-7649-4d12-a9cf-96644d5c0750"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "596057de-4c85-412d-a387-a962faca8132",
+          "id": 1457,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Detection Aggregates",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Retrieves a count of detections by a query from CrowdStrike Falcon based on the aggregate query name and type, the field used to compute the aggregation and other input parameters you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/c7750df4-697d-48fa-b4ec-1974c81028ea",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Detection Aggregates",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "b0fbea20-612e-4176-8bb7-4590647bba54",
+                "params": {
+                  "q": "",
+                  "name": "",
+                  "size": "",
+                  "sort": "",
+                  "type": "",
+                  "field": "",
+                  "filter": "",
+                  "ranges": "",
+                  "missing": "",
+                  "interval": "",
+                  "date_ranges": "",
+                  "min_doc_count": "",
+                  "sub_aggregates": ""
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "detection_aggregates",
+                "operationTitle": "Detection Aggregates",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "30067d4c-090f-427a-a681-ae85e86bb70b"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "a953c44a-cc7e-45c6-944c-53e6244b8ab2",
+                "title": "CrowdStrike Falcon: Detection Aggregates",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "c7750df4-697d-48fa-b4ec-1974c81028ea"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Detection Aggregates",
+              "targetStep": "/api/3/workflow_steps/30067d4c-090f-427a-a681-ae85e86bb70b",
+              "sourceStep": "/api/3/workflow_steps/c7750df4-697d-48fa-b4ec-1974c81028ea",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "97a90e42-fdc2-4037-819a-8c758224ca03"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "5d5f26cc-2fec-4abc-b68f-a5ab574393bb",
+          "id": 1449,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get User ID",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Retrieves the UID of the username specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/3d3ceee4-a11e-48ce-b485-8590ed5765a8",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get User ID",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "''",
+                "params": {
+                  "uid": ""
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "get_uid",
+                "operationTitle": "Get User ID",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "37036795-37dc-4d43-abaa-0f807121bf7b"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "15051cb2-c40d-45f8-88f7-2fee53b5dfbc",
+                "title": "CrowdStrike Falcon: Get User ID",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "3d3ceee4-a11e-48ce-b485-8590ed5765a8"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get User ID",
+              "targetStep": "/api/3/workflow_steps/37036795-37dc-4d43-abaa-0f807121bf7b",
+              "sourceStep": "/api/3/workflow_steps/3d3ceee4-a11e-48ce-b485-8590ed5765a8",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "1b11a9dc-8859-4fa4-934d-559239d958aa"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "77622e52-ad4d-482c-bb57-7ac3436cc1cd",
+          "id": 1471,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Search Incidents",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Search for incidents by providing an FQL filter, sorting, and paging details.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/5995e30f-52f6-456c-9574-5669113d3f8c",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "27a36a71-a972-43a8-8b52-08bf6ca3aea1",
+                "title": "CrowdStrike Falcon: Search Incidents",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "5995e30f-52f6-456c-9574-5669113d3f8c"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Search Incidents",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "b0fbea20-612e-4176-8bb7-4590647bba54",
+                "params": {
+                  "sort": "",
+                  "limit": 100,
+                  "offset": "",
+                  "filter_str": ""
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "incidents_query",
+                "operationTitle": "Search Incidents",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "60fb3fae-4f96-4228-8e32-21a10cb1650f"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Search Incidents",
+              "targetStep": "/api/3/workflow_steps/60fb3fae-4f96-4228-8e32-21a10cb1650f",
+              "sourceStep": "/api/3/workflow_steps/5995e30f-52f6-456c-9574-5669113d3f8c",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "43b7df0f-3e06-431f-a521-c7c297b9ea16"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "7dd16418-bac2-4731-bf29-92e92525fe4a",
+          "id": 1452,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Create IOC",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Creates an indicator on CrowdStrike Falcon based on the IOC type and value, policy, and other input parameters you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/52eebce8-9504-4d26-8901-bf6b8a3eb408",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "32c9f2fa-60e4-43c2-a5b3-72c6c5ddd1a6",
+                "title": "CrowdStrike Falcon: Create IOC",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "52eebce8-9504-4d26-8901-bf6b8a3eb408"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Create IOC",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "b0fbea20-612e-4176-8bb7-4590647bba54",
+                "params": {
+                  "type": "",
+                  "value": "",
+                  "policy": "detect",
+                  "source": "",
+                  "description": "",
+                  "share_level": "red",
+                  "expiration_days": 30
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "upload_ioc",
+                "operationTitle": "Create IOC",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "9100ef10-b7aa-45b1-88d9-0245e0e81084"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Create IOC",
+              "targetStep": "/api/3/workflow_steps/9100ef10-b7aa-45b1-88d9-0245e0e81084",
+              "sourceStep": "/api/3/workflow_steps/52eebce8-9504-4d26-8901-bf6b8a3eb408",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "e9e96894-e1b2-4b42-8dea-35d1b436dac9"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "86b25c21-d230-45ac-8fd4-f5a5e813abfd",
+          "id": 1479,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Update Detection",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Resolves and updates a detection.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/06cde500-3768-4d5e-91a0-c2562c84a61e",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "fdb0dc36-3c76-4636-9740-400b60943f0d",
+                "title": "CrowdStrike Falcon: Update Detection",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "06cde500-3768-4d5e-91a0-c2562c84a61e"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Update Detection",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "''",
+                "params": {
+                  "ids": "",
+                  "uid": "",
+                  "status": "",
+                  "comment": "",
+                  "show_in_ui": ""
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "update_detection",
+                "operationTitle": "Update Detection",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "420de5a7-fb52-44d7-8a52-a35569f92436"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Update Detection",
+              "targetStep": "/api/3/workflow_steps/420de5a7-fb52-44d7-8a52-a35569f92436",
+              "sourceStep": "/api/3/workflow_steps/06cde500-3768-4d5e-91a0-c2562c84a61e",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "9833faaf-fd5c-42e7-86f7-2748ca150b31"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "935f1076-ebf1-4ec3-a784-89c180382342",
+          "id": 1482,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Incidents Crowdstrike Score",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Query environment wide CrowdStrike Score and return the entity data.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/76f91962-e497-4ef7-9cec-6ddbadee727a",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "662c4e92-7972-4dd5-840b-23850ff0f057",
+                "title": "CrowdStrike Falcon: Get Incidents Crowdstrike Score",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "76f91962-e497-4ef7-9cec-6ddbadee727a"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Incidents Crowdstrike Score",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "b0fbea20-612e-4176-8bb7-4590647bba54",
+                "params": {
+                  "score": "",
+                  "timestamp": ""
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "incidents_get_crowdscores",
+                "operationTitle": "Get Incidents Crowdstrike Score",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "ee2650a5-f418-4988-8be9-5fcb94f7dd89"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get Incidents Crowdstrike Score",
+              "targetStep": "/api/3/workflow_steps/ee2650a5-f418-4988-8be9-5fcb94f7dd89",
+              "sourceStep": "/api/3/workflow_steps/76f91962-e497-4ef7-9cec-6ddbadee727a",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "382933de-5d3a-4979-adc7-fe11eecad41f"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "94ade7b6-6210-4350-af34-5fbe125b3467",
+          "id": 1462,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Hunt File",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Hunts a file on CrowdStrike Falcon using the filehash type and value you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/82a2ae32-b339-4bc2-b575-a76ae337505a",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "39ca262c-0c1b-45f0-b6cd-844720db0627",
+                "title": "CrowdStrike Falcon: Hunt File",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "82a2ae32-b339-4bc2-b575-a76ae337505a"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Hunt File",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "b0fbea20-612e-4176-8bb7-4590647bba54",
+                "params": {
+                  "hash_type": "",
+                  "count_only": "",
+                  "hash_value": ""
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "hunt_file",
+                "operationTitle": "Hunt File",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "c0e774c4-7621-418c-a4f4-1d5afe2fac29"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Hunt File",
+              "targetStep": "/api/3/workflow_steps/c0e774c4-7621-418c-a4f4-1d5afe2fac29",
+              "sourceStep": "/api/3/workflow_steps/82a2ae32-b339-4bc2-b575-a76ae337505a",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "7bce7b5d-9eb3-4fb5-91aa-53807aa4d808"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "a0e5ae27-e47f-4a3b-96ad-f9d73eaa55f3",
+          "id": 1464,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Usernames List",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "List the usernames (usually an email address) for all users in your customer account.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/8950a9db-62b6-4142-88ea-15fd207b702f",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Usernames List",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "''",
+                "params": [],
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "list_usernames",
+                "operationTitle": "Get Usernames List",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "875653a1-6e52-4d52-94c3-b2bd1b45ddd6"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "4bbbd977-42a8-4379-9fa6-f7213865adc4",
+                "title": "CrowdStrike Falcon: Get Usernames List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "8950a9db-62b6-4142-88ea-15fd207b702f"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get Usernames List",
+              "targetStep": "/api/3/workflow_steps/875653a1-6e52-4d52-94c3-b2bd1b45ddd6",
+              "sourceStep": "/api/3/workflow_steps/8950a9db-62b6-4142-88ea-15fd207b702f",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "8d16ad2d-47e3-485f-9614-f81950b706ee"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "a83351da-e56b-4b37-b5bd-2e36531d92a8",
+          "id": 1463,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Update IOC",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Updates an indicator on CrowdStrike Falcon, based on the IOC type and value and other input parameters you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/3c671094-d8ec-4f99-8e2f-e38af65a0968",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "b178f5bb-186d-4a5f-a7d2-7bf094fe66e5",
+                "title": "CrowdStrike Falcon: Update IOC",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "3c671094-d8ec-4f99-8e2f-e38af65a0968"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Update IOC",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "b0fbea20-612e-4176-8bb7-4590647bba54",
+                "params": {
+                  "type": "",
+                  "value": "",
+                  "policy": "detect",
+                  "source": "",
+                  "description": "",
+                  "share_level": "red",
+                  "expiration_days": 30
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "update_ioc",
+                "operationTitle": "Update IOC",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "bcb6ebe6-16b7-4b66-96d7-386bd9ae9461"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Update IOC",
+              "targetStep": "/api/3/workflow_steps/bcb6ebe6-16b7-4b66-96d7-386bd9ae9461",
+              "sourceStep": "/api/3/workflow_steps/3c671094-d8ec-4f99-8e2f-e38af65a0968",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "a8184341-2e30-4bb3-b1fe-d9ab9e719ed7"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "ac4be901-3d5b-4950-8303-beb3d16d210b",
+          "id": 1461,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": ">> Crowdstrike > Handle Macros",
+          "aliasName": null,
+          "tag": "#crowd-strike-falcon #dataingestion",
+          "description": "This playbook create Microsoft Management Activity API macros if not exist.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [
+            "CrowdStrikeFalconMacroName",
+            "CrowdStrikeFalconMacroValue",
+            "overrideIfNoMatch"
+          ],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/822dc14c-ecca-417d-80e0-d671ad90545a",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Fetch Macro Current Value",
+              "description": null,
+              "arguments": {
+                "macroExistingRecord": "{{vars.steps.Get_Macro_Status.data['hydra:member'][0]}}"
+              },
+              "status": null,
+              "top": "200",
+              "left": "340",
+              "stepType": "/api/3/workflow_step_types/04d0cf46-b6a8-42c4-8683-60a7eaa69e8f",
+              "group": null,
+              "uuid": "24d4705f-f61a-4251-8781-74cab951c647"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Create CrowdStrike Falcon Macro",
+              "description": null,
+              "arguments": {
+                "config": "32a9a084-8135-41bb-8649-569c45d80505",
+                "params": {
+                  "iri": "/api/wf/api/dynamic-variable/?format=json",
+                  "body": "{ 'name':'{{vars.input.params.CrowdStrikeFalconMacroName}}', 'value':'{{vars.input.params.CrowdStrikeFalconMacroValue}}' }",
+                  "method": "POST"
+                },
+                "version": "3.1.2",
+                "connector": "cyops_utilities",
+                "operation": "make_cyops_request",
+                "operationTitle": "CyOPs: Make CyOPs API Call",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "340",
+              "left": "340",
+              "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+              "group": null,
+              "uuid": "2c48b3bd-b961-429c-a1e4-1631e4b2ccdf"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "step_variables": {
+                  "input": {
+                    "params": {
+                      "overrideIfNoMatch": "{{ vars.overrideIfNoMatch }}",
+                      "CrowdStrikeFalconMacroName": "{{ vars.CrowdStrikeFalconMacroName }}",
+                      "CrowdStrikeFalconMacroValue": "{{ vars.CrowdStrikeFalconMacroValue }}",
+                      "MicrosoftManagementActivityAPIMacroName": "{{ vars.MicrosoftManagementActivityAPIMacroName }}",
+                      "MicrosoftManagementActivityAPIMacroValue": "{{ vars.MicrosoftManagementActivityAPIMacroValue }}"
+                    }
+                  }
+                }
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/b348f017-9a94-471f-87f8-ce88b6a7ad62",
+              "group": null,
+              "uuid": "822dc14c-ecca-417d-80e0-d671ad90545a"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Update Macro If Required",
+              "description": null,
+              "arguments": {
+                "when": "{{(vars.input.params.overrideIfNoMatch  == true) and (vars.macroExistingRecord.value != vars.input.params.CrowdStrikeFalconMacroValue)}}",
+                "params": {
+                  "iri": "/api/wf/api/dynamic-variable/{{vars.macroExistingRecord.id}}/",
+                  "body": "{ 'name': '{{vars.input.params.CrowdStrikeFalconMacroName}}'   , 'value': '{{vars.input.params.CrowdStrikeFalconMacroValue}}' }",
+                  "method": "PUT"
+                },
+                "version": "3.1.2",
+                "connector": "cyops_utilities",
+                "operation": "make_cyops_request",
+                "operationTitle": "FSR: Make FortiSOAR API Call",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "200",
+              "left": "640",
+              "stepType": "/api/3/workflow_step_types/0109f35d-090b-4a2b-bd8a-94cbc3508562",
+              "group": null,
+              "uuid": "e5a9ab3c-64fa-47d4-a1d5-0f3831710675"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Macro Status",
+              "description": null,
+              "arguments": {
+                "name": "Utilities",
+                "config": "32a9a084-8135-41bb-8649-569c45d80505",
+                "params": {
+                  "iri": "/api/wf/api/dynamic-variable/?format=json&name={{vars.input.params.CrowdStrikeFalconMacroName}}",
+                  "body": "",
+                  "method": "GET"
+                },
+                "version": "3.1.2",
+                "connector": "cyops_utilities",
+                "operation": "make_cyops_request",
+                "operationTitle": "CyOPs: Make CyOPs API Call",
+                "step_variables": []
+              },
+              "status": null,
+              "top": "140",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "ebaa495e-4129-40a5-80e6-eafbccbd7ab8"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Check CrowdStrike Falcon Macro",
+              "description": null,
+              "arguments": {
+                "conditions": [
+                  {
+                    "option": "No",
+                    "step_iri": "/api/3/workflow_steps/2c48b3bd-b961-429c-a1e4-1631e4b2ccdf",
+                    "condition": "{{ vars.steps.Get_Macro_Status.data['hydra:totalItems'] == 0 }}",
+                    "step_name": "Create CrowdStrike Falcon Macro"
+                  },
+                  {
+                    "option": "Yes",
+                    "default": true,
+                    "step_iri": "/api/3/workflow_steps/24d4705f-f61a-4251-8781-74cab951c647",
+                    "step_name": "Fetch Macro Current Value"
+                  }
+                ]
+              },
+              "status": null,
+              "top": "260",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/12254cf5-5db7-4b1a-8cb1-3af081924b28",
+              "group": null,
+              "uuid": "f3ace294-556a-4060-8119-6d145bf116da"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Check Microsoft Management Activity API Macro -> Create Microsoft Management Activity API Macro",
+              "targetStep": "/api/3/workflow_steps/2c48b3bd-b961-429c-a1e4-1631e4b2ccdf",
+              "sourceStep": "/api/3/workflow_steps/f3ace294-556a-4060-8119-6d145bf116da",
+              "label": "No",
+              "isExecuted": false,
+              "uuid": "53d19933-f064-4c25-806a-4f1603a10eb2"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Check CrowdStrike Falcon Macro -> Fetch Macro Current Value",
+              "targetStep": "/api/3/workflow_steps/24d4705f-f61a-4251-8781-74cab951c647",
+              "sourceStep": "/api/3/workflow_steps/f3ace294-556a-4060-8119-6d145bf116da",
+              "label": "Yes",
+              "isExecuted": false,
+              "uuid": "6d872e5f-0b4a-4e81-b539-8c648b714020"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Get Macro Status -> Check Microsoft Management Activity API Macro",
+              "targetStep": "/api/3/workflow_steps/f3ace294-556a-4060-8119-6d145bf116da",
+              "sourceStep": "/api/3/workflow_steps/ebaa495e-4129-40a5-80e6-eafbccbd7ab8",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "90eb708c-19e8-43a0-8af1-16e9a371ee9b"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Fetch Macro Current Value -> Update Macro If Required",
+              "targetStep": "/api/3/workflow_steps/e5a9ab3c-64fa-47d4-a1d5-0f3831710675",
+              "sourceStep": "/api/3/workflow_steps/24d4705f-f61a-4251-8781-74cab951c647",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "b3421b2b-e16d-4740-bef1-92f4b417a56e"
+            },
+            {
+              "@type": "WorkflowRoute",
+              "name": "Start -> Get All Macros",
+              "targetStep": "/api/3/workflow_steps/ebaa495e-4129-40a5-80e6-eafbccbd7ab8",
+              "sourceStep": "/api/3/workflow_steps/822dc14c-ecca-417d-80e0-d671ad90545a",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "e2a2d732-4836-4bae-9af7-ad318e0651d8"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "b795a220-7b0f-4581-acd1-ec575320d1fc",
+          "id": 1459,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "dataingestion",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get User Details",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Retrieves the user details of specified user.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/d2270ee9-4cf6-4822-aa97-ef5e9eac7c33",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get User Details",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "''",
+                "params": {
+                  "ids": ""
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "get_user_details",
+                "operationTitle": "Get User Details",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "1e7c0207-da87-448b-8116-3ced16ab88ed"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "2e542f7a-8a9d-458c-9b63-c378089c97f0",
+                "title": "CrowdStrike Falcon: Get User Details",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "d2270ee9-4cf6-4822-aa97-ef5e9eac7c33"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get User Details",
+              "targetStep": "/api/3/workflow_steps/1e7c0207-da87-448b-8116-3ced16ab88ed",
+              "sourceStep": "/api/3/workflow_steps/d2270ee9-4cf6-4822-aa97-ef5e9eac7c33",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "2dc1ec1e-0957-466a-8da7-16f3e5e6a4ea"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "ba57b6b8-f4a5-46ed-b9b6-4e69c9e37261",
+          "id": 1474,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Incident Details",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Get details on incidents by providing incident IDs.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/e14dd8ac-e926-4b8a-99cc-b70a1bdd8a0d",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Incident Details",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "b0fbea20-612e-4176-8bb7-4590647bba54",
+                "params": {
+                  "ids": ""
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "incidents_get_details",
+                "operationTitle": "Get Incident Details",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "5f9b202a-9d54-4bfb-bde3-5b0f4f815b53"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "427d5aa6-0904-41ae-9bce-5205f6346bd0",
+                "title": "CrowdStrike Falcon: Get Incident Details",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "e14dd8ac-e926-4b8a-99cc-b70a1bdd8a0d"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get Incident Details",
+              "targetStep": "/api/3/workflow_steps/5f9b202a-9d54-4bfb-bde3-5b0f4f815b53",
+              "sourceStep": "/api/3/workflow_steps/e14dd8ac-e926-4b8a-99cc-b70a1bdd8a0d",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "ed3fe023-6cc4-40c5-a5b3-b3aab151cec2"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "bdce4569-2fa8-4424-92ee-c0047db5e19e",
+          "id": 1466,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Contain the Host",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "To prevent a potentially compromised host from communicating, network contain the host",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/7ce88c01-a491-4b9b-9307-bf739f635a38",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "c2dc812a-59d0-4d3f-ac8b-ffa3c64e95ff",
+                "title": "CrowdStrike Falcon: Contain the Host",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "7ce88c01-a491-4b9b-9307-bf739f635a38"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Contain the Host",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "b0fbea20-612e-4176-8bb7-4590647bba54",
+                "params": {
+                  "ids": ""
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "quarantine_device",
+                "operationTitle": "Contain the Host",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "cb3ca639-e49c-4ab4-b00c-cef568322b75"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Contain the Host",
+              "targetStep": "/api/3/workflow_steps/cb3ca639-e49c-4ab4-b00c-cef568322b75",
+              "sourceStep": "/api/3/workflow_steps/7ce88c01-a491-4b9b-9307-bf739f635a38",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "878d5d43-ec55-46c0-842c-8cc1539f5da8"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "c19dabf2-4a68-44e5-b698-e177635f1348",
+          "id": 1470,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Device Details",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Retrieves details of a specific device from CrowdStrike Falcon, based on the device ID you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/df127773-f37b-4833-a525-71b39a4aaecd",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Device Details",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "b0fbea20-612e-4176-8bb7-4590647bba54",
+                "params": {
+                  "ids": ""
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "device_details",
+                "operationTitle": "Get Device Details",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "c84a9315-6c94-4de2-a3bc-4ea5fbd9efb9"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "48e938da-1d53-4698-b5da-0f187cb0febe",
+                "title": "CrowdStrike Falcon: Get Device Details",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "df127773-f37b-4833-a525-71b39a4aaecd"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get Device Details",
+              "targetStep": "/api/3/workflow_steps/c84a9315-6c94-4de2-a3bc-4ea5fbd9efb9",
+              "sourceStep": "/api/3/workflow_steps/df127773-f37b-4833-a525-71b39a4aaecd",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "3370cfbc-9540-4a49-bb58-02a867d6d3d2"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "c419455b-b9d0-4163-906b-6eb0236aa4c1",
+          "id": 1447,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get IOC Details",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Retrieves details of a specific IOC from CrowdStrike Falcon, based on the IOC type and value you have specified.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/d90ab6ee-c45b-4875-9b0b-5016d004000b",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Get IOC Details",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "b0fbea20-612e-4176-8bb7-4590647bba54",
+                "params": {
+                  "ioc_type": "",
+                  "ioc_value": ""
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "get_ioc",
+                "operationTitle": "Get IOC Details",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "046f8f4d-5a02-4e14-ad5e-c24fbfd154bb"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "f06bdbe5-6ae7-475b-8ad4-aabb28716774",
+                "title": "CrowdStrike Falcon: Get IOC Details",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "d90ab6ee-c45b-4875-9b0b-5016d004000b"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get IOC Details",
+              "targetStep": "/api/3/workflow_steps/046f8f4d-5a02-4e14-ad5e-c24fbfd154bb",
+              "sourceStep": "/api/3/workflow_steps/d90ab6ee-c45b-4875-9b0b-5016d004000b",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "41f2d7d5-e4b0-401c-8b01-0d6c54864b5a"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "cee1ff6f-f449-419d-90fc-3dfa3c72cb79",
+          "id": 1465,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Hunt Domain",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Hunts a domain on CrowdStrike Falcon using the domain value you have specified. This operation retrieves a list of device IDs from CrowdStrike Falcon on which the domain was observed.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/a4b7bdd9-b879-4701-a27a-d189472d882b",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Hunt Domain",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "b0fbea20-612e-4176-8bb7-4590647bba54",
+                "params": {
+                  "count_only": "",
+                  "domain_value": ""
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "hunt_domain",
+                "operationTitle": "Hunt Domain",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "4b0f4a2a-cfed-464d-9626-594cb4e0865b"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "1ec1752d-95b1-40cc-9d8f-eb0f87903780",
+                "title": "CrowdStrike Falcon: Hunt Domain",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "a4b7bdd9-b879-4701-a27a-d189472d882b"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Hunt Domain",
+              "targetStep": "/api/3/workflow_steps/4b0f4a2a-cfed-464d-9626-594cb4e0865b",
+              "sourceStep": "/api/3/workflow_steps/a4b7bdd9-b879-4701-a27a-d189472d882b",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "5c0b08b9-7796-48de-b248-857e9553bb6a"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "db0c1a56-034c-4bfe-8e2d-460feab14504",
+          "id": 1472,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Download Session File",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Get the session file.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/7af42c6f-34fc-486d-aaa9-1d7892d6a034",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Download Session File",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "b0fbea20-612e-4176-8bb7-4590647bba54",
+                "params": {
+                  "sha256": "",
+                  "device_id": "",
+                  "file_name": "",
+                  "extra_params": ""
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "session_file_download",
+                "operationTitle": "Download Session File",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "6cf84342-afc8-4e7c-a828-724a5c90c918"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "95e3a487-18aa-4abf-8919-3dfdaa4edc17",
+                "title": "CrowdStrike Falcon: Download Session File",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "7af42c6f-34fc-486d-aaa9-1d7892d6a034"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Download Session File",
+              "targetStep": "/api/3/workflow_steps/6cf84342-afc8-4e7c-a828-724a5c90c918",
+              "sourceStep": "/api/3/workflow_steps/7af42c6f-34fc-486d-aaa9-1d7892d6a034",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "84ae71a8-422e-4f9e-bd10-5e49550863fc"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "dc6798f9-3565-4e1e-aad3-f312d442e066",
+          "id": 1455,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Download Session File List",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Get the list of the files available for the download",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/f9b7af42-f2ae-4858-9485-61b0a2330739",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Download Session File List",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "b0fbea20-612e-4176-8bb7-4590647bba54",
+                "params": {
+                  "device_id": ""
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "session_file_list",
+                "operationTitle": "Download Session File List",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "29db539c-9472-40ac-a00a-c300486a4188"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "a2bb1258-25ed-4df2-af01-4f72f5bfc57a",
+                "title": "CrowdStrike Falcon: Download Session File List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "f9b7af42-f2ae-4858-9485-61b0a2330739"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Download Session File List",
+              "targetStep": "/api/3/workflow_steps/29db539c-9472-40ac-a00a-c300486a4188",
+              "sourceStep": "/api/3/workflow_steps/f9b7af42-f2ae-4858-9485-61b0a2330739",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "c82465ec-1576-4f6e-86d1-ef615786c324"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "e021d998-355e-4140-8b3c-f0ddfc21b163",
+          "id": 1467,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Endpoint List",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Retrieves a list of all the all endpoints or specific endpoints based on the input parameters you have specified configured on a device on CrowdStrike Falcon.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/9f48d4c5-9cfd-4164-8a45-c84403458ea2",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "0c471f60-73c4-44f8-af48-b9c0c8adffdc",
+                "title": "CrowdStrike Falcon: Get Endpoint List",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "9f48d4c5-9cfd-4164-8a45-c84403458ea2"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Endpoint List",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "b0fbea20-612e-4176-8bb7-4590647bba54",
+                "params": {
+                  "limit": 100,
+                  "offset": "",
+                  "filter_str": ""
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "list_endpoint",
+                "operationTitle": "Get Endpoint List",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "cbb49ad6-2f81-4625-9244-b2fa6067206f"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get Endpoint List",
+              "targetStep": "/api/3/workflow_steps/cbb49ad6-2f81-4625-9244-b2fa6067206f",
+              "sourceStep": "/api/3/workflow_steps/9f48d4c5-9cfd-4164-8a45-c84403458ea2",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "2d7f058b-92f1-4f9e-a6f3-3386f8bf0be4"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "ec3d0918-3b54-4048-87cd-2bd4f08bb264",
+          "id": 1478,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        },
+        {
+          "@type": "Workflow",
+          "triggerLimit": null,
+          "name": "Get Scripts Details by IDs",
+          "aliasName": null,
+          "tag": "#CrowdStrike Falcon",
+          "description": "Retrieves the scripts using their IDs you have specified. Which will be run using \"runscript\" command.",
+          "isActive": false,
+          "debug": false,
+          "singleRecordExecution": false,
+          "remoteExecutableFlag": false,
+          "parameters": [],
+          "synchronous": false,
+          "lastModifyDate": 1675800351,
+          "collection": "/api/3/workflow_collections/02a1f2cf-c41c-4e29-b594-1fdd21430a64",
+          "versions": [],
+          "triggerStep": "/api/3/workflow_steps/1f341b84-2912-4d2f-a3d8-58ba0b897d10",
+          "steps": [
+            {
+              "@type": "WorkflowStep",
+              "name": "Start",
+              "description": null,
+              "arguments": {
+                "route": "a3985cf8-8bc3-4a2d-9d68-63bb0a39f113",
+                "title": "CrowdStrike Falcon: Get Scripts Details by IDs",
+                "resources": [
+                  "alerts"
+                ],
+                "inputVariables": [],
+                "step_variables": {
+                  "input": {
+                    "records": "{{vars.input.records[0]}}"
+                  }
+                },
+                "noRecordExecution": true,
+                "singleRecordExecution": false
+              },
+              "status": null,
+              "top": "20",
+              "left": "20",
+              "stepType": "/api/3/workflow_step_types/f414d039-bb0d-4e59-9c39-a8f1e880b18a",
+              "group": null,
+              "uuid": "1f341b84-2912-4d2f-a3d8-58ba0b897d10"
+            },
+            {
+              "@type": "WorkflowStep",
+              "name": "Get Scripts Details by IDs",
+              "description": null,
+              "arguments": {
+                "name": "CrowdStrike Falcon",
+                "config": "b0fbea20-612e-4176-8bb7-4590647bba54",
+                "params": {
+                  "file_ids": ""
+                },
+                "version": "2.2.4",
+                "connector": "crowd-strike-falcon",
+                "operation": "scripts_get",
+                "operationTitle": "Get Scripts Details by IDs",
+                "step_variables": {
+                  "output_data": "{{vars.result}}"
+                }
+              },
+              "status": null,
+              "top": "120",
+              "left": "188",
+              "stepType": "/api/3/workflow_step_types/0bfed618-0316-11e7-93ae-92361f002671",
+              "group": null,
+              "uuid": "3b8de41e-34e2-440f-b3fc-722b367374bf"
+            }
+          ],
+          "routes": [
+            {
+              "@type": "WorkflowRoute",
+              "name": "Alerts -> Get Scripts Details by IDs",
+              "targetStep": "/api/3/workflow_steps/3b8de41e-34e2-440f-b3fc-722b367374bf",
+              "sourceStep": "/api/3/workflow_steps/1f341b84-2912-4d2f-a3d8-58ba0b897d10",
+              "label": null,
+              "isExecuted": false,
+              "uuid": "0584dbab-e085-4148-916b-352b827d1ca2"
+            }
+          ],
+          "groups": [],
+          "priority": null,
+          "uuid": "f5bf968c-ec12-48f9-b9c3-7a88f590660b",
+          "id": 1450,
+          "owners": [],
+          "isPrivate": false,
+          "deletedAt": null,
+          "importedBy": [],
+          "recordTags": [
+            "CrowdStrike",
+            "crowd-strike-falcon"
+          ]
+        }
+      ]
+    }
+  ],
+  "exported_tags": [
+    "CrowdStrike",
+    "crowd-strike-falcon",
+    "dataingestion",
+    "fetch",
+    "crowdstrike-intel",
+    "create",
+    "ingest"
+  ]
+}
